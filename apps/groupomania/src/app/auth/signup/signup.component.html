@@ -1,12 +1,36 @@
 <p-card header="Inscription">
-    <ng-template pTemplate="footer">
-        <div class="p-d-flex p-jc-center">
+    <div class="p-fluid">
+        <div class="p-float-label p-mb-4">
+            <input id="float-input" type="text" pInputText />
+            <label for="float-input">Prénom</label>
+        </div>
+        <div class="p-float-label p-mb-4">
+            <input id="float-input" type="text" pInputText />
+            <label for="float-input">Nom</label>
+        </div>
+        <div class="p-float-label p-mb-4">
+            <input id="float-input" type="text" pInputText />
+            <label for="float-input">Adresse Email</label>
+        </div>
+        <div class="p-float-label p-mb-4">
+            <p-password
+                [toggleMask]="true"
+                promptLabel="Entrez un mot de passe"
+                weakLabel="Faible"
+                mediumLabel="Moyen"
+                strongLabel="Fort"
+            ></p-password>
+            <label for="float-input">Mot de passe</label>
+        </div>
+        <div>
             <button pButton pRipple label="M'inscrire"></button>
         </div>
-        <p-divider></p-divider>
+    </div>
+    <ng-template pTemplate="footer">
+        <p-divider styleClass="p-mt-0"></p-divider>
         <p>
             Vous avez déjà un compte ?
-            <a class="g-link" routerLink="/auth/signin"><strong>Se connecter</strong></a>
+            <a class="g-link p-text-bold" routerLink="/auth/signin">Se connecter</a>
         </p>
     </ng-template>
 </p-card>

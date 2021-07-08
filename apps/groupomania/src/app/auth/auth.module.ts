@@ -1,12 +1,13 @@
 import { NgModule } from "@angular/core";
 import { CardModule } from "primeng/card";
+import { MySharedModule } from "../shared/modules/my-shared.module";
+import { PasswordModule } from "primeng/password";
 
 import { SigninComponent } from "./signin/signin.component";
 import { SignupComponent } from "./signup/signup.component";
-import { MySharedModule } from "../shared/modules/my-shared.module";
 
 @NgModule({
     declarations: [SigninComponent, SignupComponent],
-    imports: [CardModule, MySharedModule],
+    imports: [CardModule, MySharedModule, PasswordModule],
 })
 export class AuthModule {}
