@@ -1,0 +1,19 @@
+<p-menubar [model]="items">
+    <ng-template pTemplate="start">
+        <img
+            class="p-d-none p-d-sm-block p-mr-5"
+            src="assets/icon-left-font.svg"
+            alt="Groupomania icon"
+            height="30"
+            routerLink="/"
+        />
+        <img class="p-d-sm-none p-mr-5" src="assets/icon.svg" alt="Groupomania icon" height="30" routerLink="/" />
+    </ng-template>
+
+    <ng-template pTemplate="end">
+        <div class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input type="text" pInputText placeholder="Rechercher un utilisateur" />
+        </div>
+    </ng-template>
+</p-menubar>

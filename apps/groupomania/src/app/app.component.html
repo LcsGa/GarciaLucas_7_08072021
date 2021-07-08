@@ -1,9 +1,5 @@
-<div style="text-align: center">
-  <h1>Welcome to groupomania!</h1>
-  <img
-    width="450"
-    src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png"
-    alt="Nx - Smart, Extensible Build Framework"
-  />
+<groupomania-header></groupomania-header>
+
+<div class="app-container p-d-flex p-jc-center p-ai-center">
+    <router-outlet></router-outlet>
 </div>
-<div>Message: {{ hello$ | async | json }}</div>

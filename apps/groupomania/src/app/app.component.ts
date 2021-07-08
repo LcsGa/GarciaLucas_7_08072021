@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Message } from '@groupomania/api-interfaces';
+import { Component, OnInit } from "@angular/core";
+import { PrimeNGConfig } from "primeng/api";
 
 @Component({
-  selector: 'groupomania-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+    selector: "groupomania-root",
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.scss"],
 })
-export class AppComponent {
-  hello$ = this.http.get<Message>('/api/hello');
-  constructor(private http: HttpClient) {}
+export class AppComponent implements OnInit {
+    constructor(private primengConfig: PrimeNGConfig) {}
+
+    ngOnInit(): void {
+        this.primengConfig.ripple = true;
+    }
 }
