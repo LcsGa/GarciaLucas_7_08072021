@@ -1,0 +1,21 @@
+<p-card styleClass="p-shadow-2">
+    <ng-template pTemplate="header">
+        <figure class="p-px-4 p-py-3 p-d-flex p-ai-center">
+            <p-avatar class="p-mr-3" image="assets/users/user-default.png" size="xlarge" shape="circle"></p-avatar>
+            <figcaption>
+                <p class="p-text-bold">Firstname</p>
+                <p>Lastname</p>
+            </figcaption>
+        </figure>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button
+            pButton
+            pRipple
+            class="p-button-danger p-button-outlined"
+            label="Supprimer le compte"
+            icon="pi pi-trash"
+        ></button>
+    </ng-template>
+</p-card>

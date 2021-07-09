@@ -1,22 +1,22 @@
-<p-card header="Connexion">
+<p-card styleClass="p-shadow-2 p-m-3" header="Connexion">
     <div class="p-fluid">
         <div class="p-float-label p-mb-4">
-            <input id="float-input" type="text" pInputText />
-            <label for="float-input">Adresse Email</label>
+            <input type="text" pInputText />
+            <label>Adresse Email</label>
         </div>
         <div class="p-float-label p-mb-4">
             <p-password [toggleMask]="true" [feedback]="false"></p-password>
-            <label for="float-input">Mot de passe</label>
+            <label>Mot de passe</label>
         </div>
         <div>
-            <button pButton pRipple label="Me connecter"></button>
+            <button pButton pRipple label="Me connecter" [disabled]="!form.valid"></button>
         </div>
     </div>
     <ng-template pTemplate="footer">
         <p-divider styleClass="p-mt-0"></p-divider>
         <p>
             Vous n'avez pas encore de compte ?
-            <a class="g-link p-text-bold" routerLink="/auth/signup">S'inscrire</a>
+            <a class="p-text-bold" routerLink="/auth/signup">S'inscrire</a>
         </p>
     </ng-template>
 </p-card>

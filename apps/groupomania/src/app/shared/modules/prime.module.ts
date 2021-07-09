@@ -1,24 +1,24 @@
 import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AvatarModule } from "primeng/avatar";
 import { ButtonModule } from "primeng/button";
-import { CommonModule } from "@angular/common";
+import { CardModule } from "primeng/card";
 import { DividerModule } from "primeng/divider";
+import { FileUploadModule } from "primeng/fileupload";
 import { InputTextModule } from "primeng/inputtext";
+import { InputTextareaModule } from "primeng/inputtextarea";
 import { RippleModule } from "primeng/ripple";
-import { RouterModule } from "@angular/router";
 
 @NgModule({
     declarations: [],
     exports: [
-        BrowserModule,
-        BrowserAnimationsModule,
+        AvatarModule,
         ButtonModule,
-        CommonModule,
+        CardModule,
         DividerModule,
+        FileUploadModule,
         InputTextModule,
+        InputTextareaModule,
         RippleModule,
-        RouterModule,
     ],
 })
-export class MySharedModule {}
+export class PrimeModule {}

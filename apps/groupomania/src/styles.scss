@@ -4,9 +4,17 @@
     box-sizing: border-box;
 }
 
+body {
+    background: var(--yellow-50);
+}
+
 a {
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--yellow-600);
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 // primeng

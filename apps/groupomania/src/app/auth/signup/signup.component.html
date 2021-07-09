@@ -1,16 +1,16 @@
-<p-card header="Inscription">
-    <div class="p-fluid">
+<p-card styleClass="p-shadow-2 p-m-3" header="Inscription">
+    <form class="p-fluid" [formGroup]="form" (ngSubmit)="signup()">
         <div class="p-float-label p-mb-4">
-            <input id="float-input" type="text" pInputText />
-            <label for="float-input">Prénom</label>
+            <input type="text" pInputText formControlName="firstname" />
+            <label>Prénom</label>
         </div>
         <div class="p-float-label p-mb-4">
-            <input id="float-input" type="text" pInputText />
-            <label for="float-input">Nom</label>
+            <input type="text" pInputText formControlName="lastname" />
+            <label>Nom</label>
         </div>
         <div class="p-float-label p-mb-4">
-            <input id="float-input" type="text" pInputText />
-            <label for="float-input">Adresse Email</label>
+            <input type="text" pInputText formControlName="email" />
+            <label>Adresse Email</label>
         </div>
         <div class="p-float-label p-mb-4">
             <p-password
@@ -19,18 +19,30 @@
                 weakLabel="Faible"
                 mediumLabel="Moyen"
                 strongLabel="Fort"
-            ></p-password>
-            <label for="float-input">Mot de passe</label>
+                formControlName="password"
+            >
+                <ng-template pTemplate="footer">
+                    <p-divider></p-divider>
+                    <p class="p-mt-2">Votre mot de passe doit contenir :</p>
+                    <ul class="p-pl-2 p-ml-2 p-mt-0" style="line-height: 1.5;">
+                        <li>Au moins une minuscule</li>
+                        <li>Au moins une majuscule</li>
+                        <li>Au moins un nombre</li>
+                        <li>8 caractères minimum</li>
+                    </ul>
+                </ng-template>
+            </p-password>
+            <label>Mot de passe</label>
         </div>
         <div>
-            <button pButton pRipple label="M'inscrire"></button>
+            <button pButton pRipple label="M'inscrire" [disabled]="!form.valid"></button>
         </div>
-    </div>
+    </form>
     <ng-template pTemplate="footer">
         <p-divider styleClass="p-mt-0"></p-divider>
         <p>
             Vous avez déjà un compte ?
-            <a class="g-link p-text-bold" routerLink="/auth/signin">Se connecter</a>
+            <a class="p-text-bold" routerLink="/auth/signin">Se connecter</a>
         </p>
     </ng-template>
 </p-card>

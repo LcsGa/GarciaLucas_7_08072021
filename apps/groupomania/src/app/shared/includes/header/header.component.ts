@@ -9,20 +9,25 @@ import { MenuItem } from "primeng/api";
 })
 export class HeaderComponent implements OnInit {
     public items!: MenuItem[];
-    public isAuthActiveRoute = /auth/.test(this.router.url);
 
-    constructor(private router: Router) {}
+    constructor() {}
 
     ngOnInit(): void {
         this.items = [
             {
                 label: "Accueil",
-                routerLink: "/",
-                visible: !this.isAuthActiveRoute,
+                icon: "pi pi-home",
+                routerLink: "/home",
             },
             {
-                label: "Se déconnecter",
-                visible: !this.isAuthActiveRoute,
+                label: "Profil",
+                icon: "pi pi-user",
+                routerLink: "/profil",
+            },
+            {
+                label: "Déconnexion",
+                icon: "pi pi-sign-out",
+                routerLink: "/auth/signin",
             },
         ];
     }

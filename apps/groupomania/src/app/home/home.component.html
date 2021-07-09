@@ -1,0 +1,31 @@
+<div class="home-container">
+    <p-card styleClass="p-shadow-2 p-mb-3">
+        <div class="p-d-flex">
+            <p-avatar class="p-mr-3" image="assets/users/user-default.png" shape="circle" size="large"></p-avatar>
+            <textarea pInputTextarea style="flex: 1;" [autoResize]="true" placeholder="Quoi de neuf ?"></textarea>
+        </div>
+
+        <div class="image__container" *ngIf="image">
+            imageOK
+            <!-- <img [src]="image.files[0].objectUrl" alt=""> -->
+        </div>
+
+        <ng-template pTemplate="footer">
+            <div class="p-d-flex p-jc-between">
+                <p-fileUpload
+                    styleClass="p-button-text p-mr-3"
+                    mode="basic"
+                    chooseIcon="pi pi-image"
+                    chooseLabel="Ajouter une image"
+                    accept="image/*"
+                    [auto]="true"
+                    [customUpload]="true"
+                    (uploadHandler)="appendImage($event)"
+                ></p-fileUpload>
+                <button pButton pRipple label="Publier" icon="pi pi-send"></button>
+            </div>
+        </ng-template>
+    </p-card>
+
+    <p-card styleClass="p-shadow-2"> </p-card>
+</div>

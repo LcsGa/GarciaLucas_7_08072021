@@ -1,13 +1,24 @@
 import { NgModule } from "@angular/core";
-import { CardModule } from "primeng/card";
-import { MySharedModule } from "../shared/modules/my-shared.module";
 import { PasswordModule } from "primeng/password";
+import { PrimeModule } from "../shared/modules/prime.module";
+import { RouterModule, Routes } from "@angular/router";
 
 import { SigninComponent } from "./signin/signin.component";
 import { SignupComponent } from "./signup/signup.component";
+import { ReactiveFormsModule } from "@angular/forms";
+
+const routes: Routes = [
+    {
+        path: "auth",
+        children: [
+            { path: "signin", component: SigninComponent },
+            { path: "signup", component: SignupComponent },
+        ],
+    },
+];
 
 @NgModule({
     declarations: [SigninComponent, SignupComponent],
-    imports: [CardModule, MySharedModule, PasswordModule],
+    imports: [PasswordModule, PrimeModule, ReactiveFormsModule, RouterModule.forChild(routes)],
 })
 export class AuthModule {}

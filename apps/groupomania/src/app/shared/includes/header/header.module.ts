@@ -1,13 +1,13 @@
 import { NgModule } from "@angular/core";
-import { SharedModule } from "primeng/api";
 import { MenubarModule } from "primeng/menubar";
-import { MySharedModule } from "../../modules/my-shared.module";
+import { PrimeModule } from "../../modules/prime.module";
+import { SharedModule } from "primeng/api";
 
 import { HeaderComponent } from "./header.component";
 
 @NgModule({
     declarations: [HeaderComponent],
-    imports: [MySharedModule, SharedModule, MenubarModule],
+    imports: [MenubarModule, PrimeModule, SharedModule],
     exports: [HeaderComponent],
 })
 export class HeaderModule {}
