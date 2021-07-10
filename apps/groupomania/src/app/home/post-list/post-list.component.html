@@ -1,1 +1,40 @@
-<p-card styleClass="p-shadow-2"> </p-card>
+<p-card styleClass="p-shadow-2 p-mt-3">
+    <div class="p-d-flex p-jc-between p-pb-4">
+        <div class="p-d-flex">
+            <p-avatar class="p-mr-3" image="assets/users/user-default.png" shape="circle"></p-avatar>
+            <div>
+                <p class="p-text-bold">Lucas Garcia</p>
+                <p>17h56</p>
+            </div>
+        </div>
+
+        <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
+        <button
+            pButton
+            pRipple
+            class="p-button-secondary p-button-icon p-button-rounded p-button-text"
+            type="button"
+            icon="pi pi-ellipsis-h"
+            (click)="menu.toggle($event)"
+        ></button>
+    </div>
+
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque tempora commodi esse voluptates aperiam in nam
+        delectus ipsam. Similique qui sit nihil rerum sint beatae sapiente nesciunt iste, ex quis placeat, itaque
+        perferendis dolore laboriosam amet repellat veritatis sequi error! Voluptatem esse laboriosam eum ipsa, dolor
+        neque eos magnam qui.
+    </p>
+
+    <p-divider></p-divider>
+    <div class="p-buttonset p-d-flex">
+        <p-toggleButton
+            [(ngModel)]="liked"
+            onIcon="pi pi-heart"
+            onLabel="Je n'aime plus"
+            offIcon="pi pi-heart"
+            offLabel="J'aime"
+        ></p-toggleButton>
+        <button pButton pRipple icon="pi pi-comment" label="Commenter"></button>
+    </div>
+</p-card>
