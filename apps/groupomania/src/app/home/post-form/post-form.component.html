@@ -1,0 +1,36 @@
+<p-card styleClass="p-shadow-2 p-mb-3">
+    <div class="p-d-flex">
+        <p-avatar class="p-mr-3" image="assets/users/user-default.png" shape="circle" size="large"></p-avatar>
+        <textarea pInputTextarea style="flex: 1;" [autoResize]="true" placeholder="Quoi de neuf ?"></textarea>
+    </div>
+
+    <div class="p-d-flex p-jc-center">
+        <div class="image__container p-mt-5" *ngIf="imageBlob">
+            <img class="image__img" [src]="imageBlob" alt="Image uploadée" />
+            <button
+                pButton
+                pRipple
+                class="image__remove-button p-button-rounded p-button-icon p-button-danger p-button-raised"
+                icon="pi pi-times"
+                (click)="removeImage()"
+            ></button>
+        </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <div class="p-d-flex p-jc-between">
+            <p-fileUpload
+                #fileUpload
+                styleClass="p-button-text p-mr-3"
+                mode="basic"
+                chooseIcon="pi pi-image"
+                chooseLabel="Ajouter une image"
+                accept="image/*"
+                [auto]="true"
+                [customUpload]="true"
+                (uploadHandler)="appendImage($event, fileUpload)"
+            ></p-fileUpload>
+            <button pButton pRipple label="Publier" icon="pi pi-send"></button>
+        </div>
+    </ng-template>
+</p-card>
