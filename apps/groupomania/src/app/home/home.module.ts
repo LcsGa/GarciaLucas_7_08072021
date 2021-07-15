@@ -7,12 +7,12 @@ import { ToggleButtonModule } from "primeng/togglebutton";
 
 import { HomeComponent } from "./home.component";
 import { PostFormComponent } from "./post-form/post-form.component";
-import { PostListComponent } from "./post-list/post-list.component";
+import { PostComponent } from "./post/post.component";
 
 const routes: Routes = [{ path: "", component: HomeComponent }];
 
 @NgModule({
-    declarations: [HomeComponent, PostFormComponent, PostListComponent],
+    declarations: [HomeComponent, PostFormComponent, PostComponent],
     imports: [CommonModule, FormsModule, PrimeModule, RouterModule.forChild(routes), ToggleButtonModule],
 })
 export class HomeModule {}

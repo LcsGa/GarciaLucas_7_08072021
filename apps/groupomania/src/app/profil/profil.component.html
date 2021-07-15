@@ -1,15 +1,35 @@
 <p-card styleClass="p-shadow-2">
     <ng-template pTemplate="header">
-        <figure class="p-px-4 p-py-3 p-d-flex p-ai-center">
+        <div class="p-pt-3 p-d-flex p-flex-column p-ai-center">
             <p-avatar class="p-mr-3" image="assets/users/user-default.png" size="xlarge" shape="circle"></p-avatar>
-            <figcaption>
-                <p class="p-text-bold">Firstname</p>
-                <p>Lastname</p>
-            </figcaption>
-        </figure>
+            <p-fileUpload
+                #fileUpload
+                styleClass="p-mr-3 p-button-text p-button-secondary"
+                mode="basic"
+                chooseIcon="pi pi-image"
+                chooseLabel="Modifier la photo"
+                accept="image/*"
+                [auto]="true"
+                [customUpload]="true"
+            ></p-fileUpload>
+        </div>
     </ng-template>
 
+    <div class="p-fluid p-d-flex p-flex-column">
+        <input class="p-field" type="text" pInputText formControlName="firstname" placeholder="Prénom" />
+        <input class="p-field" type="text" pInputText formControlName="lastname" placeholder="Nom" />
+        <input
+            type="text"
+            pInputText
+            formControlName="email"
+            placeholder="Email"
+            [disabled]="true"
+            value="lcs.grc@outlook.com"
+        />
+    </div>
+
     <ng-template pTemplate="footer">
+        <button pButton pRipple class="p-mr-3" label="Enregistrer"></button>
         <button
             pButton
             pRipple
