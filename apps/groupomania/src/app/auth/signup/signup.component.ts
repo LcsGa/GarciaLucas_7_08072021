@@ -22,6 +22,6 @@ export class SignupComponent implements OnInit {
     }
 
     public signup(): void {
-        this.authService.signup(this.form);
+        this.authService.signup(this.form.value).subscribe();
     }
 }

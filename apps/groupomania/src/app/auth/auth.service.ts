@@ -1,6 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { FormGroup } from "@angular/forms";
+import { Observable } from "rxjs";
+import { UserDto } from "../../../../../libs/dto/src";
 
 @Injectable({
     providedIn: "root",
@@ -15,8 +17,8 @@ export class AuthService {
         console.log(siginForm);
     }
 
-    public signup(signupForm: FormGroup): void {
-        console.log(signupForm);
+    public signup(signupForm: FormGroup): Observable<UserDto> {
+        return this.http.post<UserDto>("/api/auth/signup", signupForm);
     }
 
     public logout(): void {}
