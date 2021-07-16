@@ -27,35 +27,59 @@
     </p>
 
     <p-divider></p-divider>
-    <div class="p-d-flex p-ai-center">
-        <p-button
-            [styleClass]="liked ? 'p-mr-2 p-button-text p-button-danger' : 'p-mr-2 p-button-text p-button-secondary'"
-            icon="pi pi-heart"
-            label="J'aime"
-            [badge]="likes.length ? likes.length + '' : ''"
-            [badgeClass]="liked ? 'p-badge-danger' : 'p-badge-secondary'"
-            (click)="like()"
-        ></p-button>
+    <div class="p-d-flex p-jc-between">
+        <div class="p-d-flex p-ai-center">
+            <p-button
+                [styleClass]="liked ? 'p-mr-2 p-button-text p-button-danger' : 'p-mr-2 p-button-text p-button-secondary'"
+                icon="pi pi-heart"
+                label="J'aime"
+                [badge]="likes.length ? likes.length + '' : ''"
+                [badgeClass]="liked ? 'p-badge-danger' : 'p-badge-secondary'"
+                (click)="like()"
+            ></p-button>
+            <button
+                pButton
+                pRipple
+                class="p-button-secondary p-button-text"
+                icon="pi pi-comment"
+                label="Commenter"
+                (click)="showCommentForm(commentTextArea)"
+            ></button>
+        </div>
+
         <button
             pButton
             pRipple
-            class="p-button-secondary p-button-text"
-            icon="pi pi-comment"
-            label="Commenter"
-            (click)="comment(commentTextArea)"
+            [class]="comments.length ? 'p-button-link' : 'p-d-none'"
+            [label]="comments.length + (comments.length > 1 ? ' commentaires' : ' commentaire')"
         ></button>
     </div>
 
-    <div [class]="doComment ? 'p-mt-3 p-d-flex p-ai-center' : 'p-d-none'">
+    <div *ngFor="let comment of comments">
+        <p>{{comment}}</p>
+    </div>
+
+    <form
+        [class]="commentFormShown ? 'p-mt-3 p-d-flex p-ai-center' : 'p-d-none'"
+        [formGroup]="commentForm"
+        (ngSubmit)="postComment()"
+    >
         <p-avatar class="p-mr-3" image="assets/users/user-default.png" shape="circle"></p-avatar>
         <textarea
             #commentTextArea
             pInputTextarea
             style="flex: 1;"
             [autoResize]="true"
-            placeholder="Ecrivez un commentaire..."
             rows="1"
+            placeholder="Ecrivez un commentaire..."
+            formControlName="comment"
         ></textarea>
-        <button pButton pRipple class="p-ml-2 p-button-icon p-button-rounded" icon="pi pi-send"></button>
-    </div>
+        <button
+            pButton
+            pRipple
+            class="p-ml-2 p-button-icon p-button-rounded"
+            icon="pi pi-send"
+            [disabled]="!commentForm.valid"
+        ></button>
+    </form>
 </p-card>

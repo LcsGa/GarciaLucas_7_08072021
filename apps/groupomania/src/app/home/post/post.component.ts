@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MenuItem } from "primeng/api";
+import { BehaviorSubject } from "rxjs";
 
 @Component({
     selector: "groupomania-post",
@@ -7,14 +9,20 @@ import { MenuItem } from "primeng/api";
     styleUrls: ["./post.component.scss"],
 })
 export class PostComponent implements OnInit {
+    public commentForm!: FormGroup;
     public items!: MenuItem[];
     public liked: boolean = false;
-    public doComment: boolean = false;
     public likes: string[] = [];
+    public commentFormShown: boolean = false;
+    public comments: string[] = [];
 
-    constructor() {}
+    constructor(private fb: FormBuilder) {}
 
     ngOnInit(): void {
+        this.commentForm = this.fb.group({
+            comment: ["", Validators.required],
+        });
+
         this.items = [
             {
                 label: "Modifier",
@@ -37,8 +45,13 @@ export class PostComponent implements OnInit {
         }
     }
 
-    public comment(commentTextArea: HTMLTextAreaElement): void {
-        this.doComment = true;
+    public showCommentForm(commentTextArea: HTMLTextAreaElement): void {
+        this.commentFormShown = true;
         setTimeout(() => commentTextArea.focus(), 0);
+    }
+
+    public postComment(): void {
+        this.comments.push(this.commentForm.controls.comment.value);
+        this.commentForm.reset();
     }
 }
