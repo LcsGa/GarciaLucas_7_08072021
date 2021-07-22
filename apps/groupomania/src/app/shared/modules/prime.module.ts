@@ -6,6 +6,7 @@ import { DividerModule } from "primeng/divider";
 import { FileUploadModule } from "primeng/fileupload";
 import { InputTextModule } from "primeng/inputtext";
 import { InputTextareaModule } from "primeng/inputtextarea";
+import { MessageModule } from "primeng/message";
 import { RippleModule } from "primeng/ripple";
 import { TieredMenuModule } from "primeng/tieredmenu";
 
@@ -19,6 +20,7 @@ import { TieredMenuModule } from "primeng/tieredmenu";
         FileUploadModule,
         InputTextModule,
         InputTextareaModule,
+        MessageModule,
         RippleModule,
         TieredMenuModule,
     ],

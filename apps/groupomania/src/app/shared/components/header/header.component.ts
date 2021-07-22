@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { MenuItem } from "primeng/api";
+import { AuthService } from "../../../auth/auth.service";
 
 @Component({
     selector: "groupomania-header",
@@ -10,7 +11,7 @@ import { MenuItem } from "primeng/api";
 export class HeaderComponent implements OnInit {
     public items!: MenuItem[];
 
-    constructor() {}
+    constructor(private authService: AuthService) {}
 
     ngOnInit(): void {
         this.items = [
@@ -27,7 +28,7 @@ export class HeaderComponent implements OnInit {
             {
                 label: "Déconnexion",
                 icon: "pi pi-sign-out",
-                routerLink: "/auth/signin",
+                command: () => this.authService.logout(),
             },
         ];
     }

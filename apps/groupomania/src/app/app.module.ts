@@ -1,15 +1,13 @@
 import { NgModule } from "@angular/core";
 import { AuthModule } from "./auth/auth.module";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from "@angular/platform-browser";
-import { HeaderModule } from "./shared/includes/header/header.module";
+import { CommonModule } from "@angular/common";
+import { HeaderModule } from "./shared/components/header/header.module";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
 
 import { AppComponent } from "./app.component";
-import { SigninComponent } from "./auth/signin/signin.component";
-import { SignupComponent } from "./auth/signup/signup.component";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { CommonModule } from "@angular/common";
 
 const routes: Routes = [
     { path: "", pathMatch: "full", redirectTo: "home" },

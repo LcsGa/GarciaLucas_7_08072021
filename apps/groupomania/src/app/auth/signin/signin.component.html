@@ -1,17 +1,18 @@
 <p-card styleClass="p-shadow-2 p-m-3" header="Connexion">
-    <div class="p-fluid">
+    <form class="p-fluid" [formGroup]="form" (ngSubmit)="signin()">
         <div class="p-float-label p-mb-4">
-            <input type="text" pInputText />
+            <input type="text" pInputText formControlName="email" />
             <label>Adresse Email</label>
         </div>
         <div class="p-float-label p-mb-4">
-            <p-password [toggleMask]="true" [feedback]="false"></p-password>
+            <p-password [toggleMask]="true" [feedback]="false" formControlName="password"></p-password>
             <label>Mot de passe</label>
         </div>
         <div>
             <button pButton pRipple label="Me connecter" [disabled]="!form.valid"></button>
+            <small class="p-error" *ngIf="hasSigninFailed">Email ou mot de passe incorrect</small>
         </div>
-    </div>
+    </form>
     <ng-template pTemplate="footer">
         <p-divider styleClass="p-mt-0"></p-divider>
         <p>
