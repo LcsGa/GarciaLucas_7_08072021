@@ -8,7 +8,7 @@ import { AppController } from "./app.controller";
 import { join } from "path";
 
 // Entities
-import { User } from "./auth/user/user.entity";
+import { User } from "./auth/users/user.entity";
 
 @Module({
     imports: [

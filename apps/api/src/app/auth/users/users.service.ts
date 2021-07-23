@@ -6,18 +6,18 @@ import { User } from "./user.entity";
 import * as bcrypt from "bcrypt";
 
 @Injectable()
-export class UserService {
-    constructor(@InjectRepository(User) private userRepository: Repository<User>) {}
+export class UsersService {
+    constructor(@InjectRepository(User) private usersRepository: Repository<User>) {}
 
     public async create(user: CreateUserDto): Promise<User> {
         const createdUser = {
             ...user,
             password: await bcrypt.hash(user.password, 10),
         };
-        return await this.userRepository.save(createdUser);
+        return await this.usersRepository.save(createdUser);
     }
 
     public async findByEmail(email: string) {
-        return (await this.userRepository.find({ email }))[0];
+        return (await this.usersRepository.find({ email }))[0];
     }
 }

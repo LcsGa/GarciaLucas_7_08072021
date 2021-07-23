@@ -2,7 +2,7 @@ import { Injectable, NotFoundException, UnauthorizedException } from "@nestjs/co
 
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
-import { UserService } from "./user/user.service";
+import { UsersService } from "./users/users.service";
 
 import * as bcrypt from "bcrypt";
 
@@ -11,13 +11,13 @@ import { CreateUserDto, SafeUser, SigninUserDto, User } from "libs/dto/src/lib/d
 @Injectable()
 export class AuthService {
     constructor(
-        private userService: UserService,
+        private usersService: UsersService,
         private jwtService: JwtService,
         private configService: ConfigService
     ) {}
 
     public async validateUser(email: string, pass: string): Promise<SafeUser> {
-        const user = await this.userService.findByEmail(email);
+        const user = await this.usersService.findByEmail(email);
 
         if (user) {
             const isPasswordValid = await bcrypt.compare(pass, user.password);
@@ -43,6 +43,6 @@ export class AuthService {
     }
 
     public async signup(user: CreateUserDto): Promise<User> {
-        return await this.userService.create(user);
+        return await this.usersService.create(user);
     }
 }
