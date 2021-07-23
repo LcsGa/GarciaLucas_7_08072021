@@ -8,6 +8,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
 
 import { AppComponent } from "./app.component";
+import { IsSignedInGuard } from "./auth/guards/is-signed-in.guard";
 
 const routes: Routes = [
     { path: "", pathMatch: "full", redirectTo: "home" },
@@ -18,10 +19,12 @@ const routes: Routes = [
     {
         path: "home",
         loadChildren: () => import("./home/home.module").then((m) => m.HomeModule),
+        canActivate: [IsSignedInGuard],
     },
     {
         path: "profil",
         loadChildren: () => import("./profil/profil.module").then((m) => m.ProfilModule),
+        canActivate: [IsSignedInGuard],
     },
 ];
 

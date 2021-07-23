@@ -24,9 +24,8 @@ export class SigninComponent implements OnInit {
     public signin(): void {
         this.authService.signin(this.form.value).subscribe({
             next: (res) => {
-                localStorage.setItem("jwt", res.access_token);
+                this.authService.storeToken(res.access_token);
                 this.hasSigninFailed = false;
-                this.router.navigateByUrl("/home");
             },
             error: () => (this.hasSigninFailed = true),
         });

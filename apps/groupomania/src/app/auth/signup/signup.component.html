@@ -9,8 +9,9 @@
             <label>Nom</label>
         </div>
         <div class="p-float-label p-mb-4">
-            <input type="text" pInputText formControlName="email" />
+            <input [class]="!isEmailUnique ? 'ng-invalid' : ''" type="text" pInputText formControlName="email" />
             <label>Adresse Email</label>
+            <small class="p-error" *ngIf="!isEmailUnique">Adresse email déjà enregistrée</small>
         </div>
         <div class="p-float-label p-mb-4">
             <p-password

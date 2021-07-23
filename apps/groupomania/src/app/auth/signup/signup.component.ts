@@ -9,6 +9,7 @@ import { AuthService } from "../auth.service";
 })
 export class SignupComponent implements OnInit {
     public form!: FormGroup;
+    public isEmailUnique = true;
 
     constructor(private fb: FormBuilder, private authService: AuthService) {}
 
@@ -22,6 +23,14 @@ export class SignupComponent implements OnInit {
     }
 
     public signup(): void {
-        this.authService.signup(this.form.value).subscribe();
+        this.authService.signup(this.form.value).subscribe({
+            next: () => {
+                this.isEmailUnique = true;
+                this.authService
+                    .signin(this.form.value)
+                    .subscribe((res) => this.authService.storeToken(res.access_token));
+            },
+            error: () => (this.isEmailUnique = false),
+        });
     }
 }
