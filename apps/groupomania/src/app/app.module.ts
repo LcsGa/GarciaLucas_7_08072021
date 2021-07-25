@@ -4,11 +4,13 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from "@angular/platform-browser";
 import { CommonModule } from "@angular/common";
 import { HeaderModule } from "./shared/components/header/header.module";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
 
 import { AppComponent } from "./app.component";
+
 import { IsSignedInGuard } from "./auth/guards/is-signed-in.guard";
+import { JwtInterceptor } from "./shared/interceptors/jwt.interceptor";
 
 const routes: Routes = [
     { path: "", pathMatch: "full", redirectTo: "home" },
@@ -39,6 +41,7 @@ const routes: Routes = [
         HttpClientModule,
         RouterModule.forRoot(routes),
     ],
+    providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
