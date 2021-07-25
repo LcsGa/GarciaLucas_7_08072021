@@ -9,6 +9,7 @@ import { AuthService } from "../../../auth/auth.service";
 })
 export class HeaderComponent implements OnInit {
     public items!: MenuItem[];
+    public isVisible = false;
 
     constructor(private authService: AuthService) {}
 

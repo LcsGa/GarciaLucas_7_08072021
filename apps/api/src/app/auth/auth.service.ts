@@ -36,7 +36,10 @@ export class AuthService {
 
         if (user) {
             return {
-                access_token: this.jwtService.sign({}, { secret: this.configService.get<string>("JWT_SECRET") }),
+                access_token: this.jwtService.sign(
+                    { userId: user.id },
+                    { secret: this.configService.get<string>("JWT_SECRET") }
+                ),
             };
         }
         throw new UnauthorizedException();
