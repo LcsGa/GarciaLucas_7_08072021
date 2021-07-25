@@ -14,3 +14,14 @@ export class User extends CreateUserDto {
 }
 
 export type SafeUser = Omit<User, "password">;
+
+// posts
+export class CreatePostDto {
+    author!: User;
+    content!: string;
+}
+
+export class Post extends CreatePostDto {
+    readonly id!: string;
+    readonly created_at!: Date;
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { SafeUrl, DomSanitizer } from "@angular/platform-browser";
-import { FileUpload } from "primeng/fileupload";
+import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import { AuthService } from "../../auth/auth.service";
+import { PostsService } from "../posts.service";
 
 @Component({
     selector: "groupomania-post-form",
@@ -8,20 +9,17 @@ import { FileUpload } from "primeng/fileupload";
     styleUrls: ["./post-form.component.scss"],
 })
 export class PostFormComponent implements OnInit {
-    public fileUpload!: FileUpload;
-    public imageBlob!: SafeUrl | null;
+    public content!: FormControl;
 
-    constructor(private sanitize: DomSanitizer) {}
+    constructor(private fb: FormBuilder, private postsService: PostsService, private authService: AuthService) {}
 
-    ngOnInit(): void {}
-
-    public appendImage(image: { files: File[] }, fileUpload: FileUpload): void {
-        this.fileUpload = fileUpload;
-        this.imageBlob = this.sanitize.bypassSecurityTrustUrl(window.URL.createObjectURL(image.files[0]));
+    ngOnInit(): void {
+        this.content = this.fb.control("", Validators.required);
     }
 
-    public removeImage(): void {
-        this.fileUpload.clear();
-        this.imageBlob = null;
+    public post(): void {
+        this.postsService
+            .post({ author: this.authService.user$.value!, content: this.content.value })
+            .subscribe((res) => console.log(res));
     }
 }

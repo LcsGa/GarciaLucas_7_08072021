@@ -9,6 +9,9 @@ import { join } from "path";
 
 // Entities
 import { User } from "./auth/users/user.entity";
+import { PostsModule } from "./posts/posts.module";
+import { CommentsModule } from "./comments/comments.module";
+import { Post } from "./posts/post.entity";
 
 @Module({
     imports: [
@@ -24,9 +27,11 @@ import { User } from "./auth/users/user.entity";
             username: "postgres",
             password: "postgres",
             database: "Groupomania",
-            entities: [User],
+            entities: [User, Post],
             synchronize: true,
         }),
+        PostsModule,
+        CommentsModule,
     ],
     controllers: [AppController],
     providers: [],

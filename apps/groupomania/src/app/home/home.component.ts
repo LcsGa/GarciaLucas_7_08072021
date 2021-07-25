@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { Post } from "@groupomania/dto";
+import { PostsService } from "./posts.service";
 
 @Component({
     selector: "groupomania-home",
@@ -6,9 +8,11 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
-    public numbers: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    public posts!: Post[];
 
-    constructor() {}
+    constructor(private postsService: PostsService) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.postsService.fetch().subscribe((posts) => (this.posts = posts));
+    }
 }
