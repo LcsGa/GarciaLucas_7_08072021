@@ -26,9 +26,7 @@ export class SignupComponent implements OnInit {
         this.authService.signup(this.form.value).subscribe({
             next: () => {
                 this.isEmailUnique = true;
-                this.authService
-                    .signin(this.form.value)
-                    .subscribe((res) => this.authService.storeToken(res.access_token));
+                this.authService.signin(this.form.value).subscribe();
             },
             error: () => (this.isEmailUnique = false),
         });

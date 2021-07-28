@@ -4,15 +4,16 @@ import { PassportModule } from "@nestjs/passport";
 import { UsersModule } from "./users/users.module";
 
 import { AuthService } from "./auth.service";
-import { JwtStrategy } from "./jwt/jwt.strategy";
 
 import { AuthController } from "./auth.controller";
+
+import { JwtStrategy } from "./jwt/jwt.strategy";
 
 @Module({
     imports: [
         JwtModule.register({
             secret: process.env.JWT_TOKEN,
-            signOptions: { expiresIn: "60s" },
+            signOptions: { expiresIn: 5 * 60 + 30 }, // 5min 30s
         }),
         PassportModule,
         UsersModule,

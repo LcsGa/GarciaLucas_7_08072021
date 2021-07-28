@@ -23,10 +23,7 @@ export class SigninComponent implements OnInit {
 
     public signin(): void {
         this.authService.signin(this.form.value).subscribe({
-            next: (res) => {
-                this.authService.storeToken(res.access_token);
-                this.hasSigninFailed = false;
-            },
+            next: () => (this.hasSigninFailed = false),
             error: () => (this.hasSigninFailed = true),
         });
     }

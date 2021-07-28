@@ -1,5 +1,7 @@
 import { Injectable, NotFoundException, UnauthorizedException } from "@nestjs/common";
 
+import { Request } from "express";
+
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import { UsersService } from "./users/users.service";
@@ -31,15 +33,17 @@ export class AuthService {
         throw new NotFoundException();
     }
 
-    public async signin(signinUser: SigninUserDto): Promise<{ access_token: string }> {
+    public createToken(userId: string): string {
+        return this.jwtService.sign({ userId }, { secret: this.configService.get<string>("JWT_SECRET") });
+    }
+
+    public async signin(signinUser: SigninUserDto): Promise<{ user: SafeUser; access_token: string }> {
         const user = await this.validateUser(signinUser.email, signinUser.password);
 
         if (user) {
             return {
-                access_token: this.jwtService.sign(
-                    { userId: user.id },
-                    { secret: this.configService.get<string>("JWT_SECRET") }
-                ),
+                user,
+                access_token: this.createToken(user.id),
             };
         }
         throw new UnauthorizedException();
@@ -47,5 +51,17 @@ export class AuthService {
 
     public async signup(user: CreateUserDto): Promise<User> {
         return await this.usersService.create(user);
+    }
+
+    public refreshAccessToken(req: Request): { access_token: string } | void {
+        const token = req.headers.authorization.slice("Bearer ".length);
+
+        if (token) {
+            const jwtVerified = this.jwtService.verify<{ userId: string }>(token, {
+                secret: this.configService.get<string>("JWT_SECRET"),
+            });
+
+            return { access_token: this.createToken(jwtVerified.userId) };
+        }
     }
 }

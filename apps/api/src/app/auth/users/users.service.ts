@@ -17,7 +17,7 @@ export class UsersService {
         return await this.usersRepository.save(createdUser);
     }
 
-    public async findByEmail(email: string) {
+    public async findByEmail(email: string): Promise<User> {
         return (await this.usersRepository.find({ email }))[0];
     }
 }

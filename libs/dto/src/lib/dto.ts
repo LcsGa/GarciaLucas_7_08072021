@@ -17,7 +17,7 @@ export type SafeUser = Omit<User, "password">;
 
 // posts
 export class CreatePostDto {
-    author!: User;
+    author!: SafeUser;
     content!: string;
 }
 
