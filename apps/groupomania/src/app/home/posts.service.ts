@@ -13,7 +13,11 @@ export class PostsService {
         return this.http.get<Post[]>("/api/posts");
     }
 
-    public post(post: CreatePostDto): Observable<Post> {
-        return this.http.post<Post>("/api/posts", post);
+    public create(createPostDto: CreatePostDto): Observable<Post> {
+        return this.http.post<Post>("/api/posts", createPostDto);
+    }
+
+    public delete(id: string): Observable<null> {
+        return this.http.delete<null>("/api/posts/" + id);
     }
 }

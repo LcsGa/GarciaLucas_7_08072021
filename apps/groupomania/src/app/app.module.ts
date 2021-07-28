@@ -12,6 +12,10 @@ import { AppComponent } from "./app.component";
 import { IsSignedInGuard } from "./auth/guards/is-signed-in.guard";
 import { JwtInterceptor } from "./shared/interceptors/jwt.interceptor";
 
+import { registerLocaleData } from "@angular/common";
+import localeFr from "@angular/common/locales/fr";
+registerLocaleData(localeFr, "fr");
+
 const routes: Routes = [
     { path: "", pathMatch: "full", redirectTo: "home" },
     {

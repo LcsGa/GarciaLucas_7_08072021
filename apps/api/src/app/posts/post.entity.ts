@@ -9,7 +9,7 @@ export class Post {
     @CreateDateColumn()
     created_at: Date;
 
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, { eager: true })
     author: User;
 
     @Column({ nullable: false })

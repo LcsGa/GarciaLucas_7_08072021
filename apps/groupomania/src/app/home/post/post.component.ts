@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Post } from "@groupomania/dto";
 import { MenuItem } from "primeng/api";
-import { BehaviorSubject } from "rxjs";
+import { PostsService } from "../posts.service";
 
 @Component({
     selector: "groupomania-post",
@@ -15,8 +16,9 @@ export class PostComponent implements OnInit {
     public likes: string[] = [];
     public commentFormShown: boolean = false;
     public comments: string[] = [];
+    @Input() public post!: Post;
 
-    constructor(private fb: FormBuilder) {}
+    constructor(private fb: FormBuilder, private postsService: PostsService) {}
 
     ngOnInit(): void {
         this.commentForm = this.fb.group({
@@ -31,8 +33,11 @@ export class PostComponent implements OnInit {
             {
                 label: "Supprimer",
                 icon: "pi pi-trash",
+                command: () => this.postsService.delete(this.post.id).subscribe(),
             },
         ];
+
+        console.log(this.post);
     }
 
     public like(): void {

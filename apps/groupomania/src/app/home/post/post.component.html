@@ -3,8 +3,8 @@
         <div class="p-d-flex">
             <p-avatar class="p-mr-3" image="assets/users/user-default.png" shape="circle"></p-avatar>
             <div>
-                <p class="p-text-bold">Lucas Garcia</p>
-                <p>17h56</p>
+                <p class="p-text-bold">{{post.author.firstname}} {{post.author.lastname}}</p>
+                <small>{{post.created_at | date: "dd MMMM YYYY, HH:mm": "": "fr"}}</small>
             </div>
         </div>
 
@@ -19,12 +19,7 @@
         ></button>
     </div>
 
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque tempora commodi esse voluptates aperiam in nam
-        delectus ipsam. Similique qui sit nihil rerum sint beatae sapiente nesciunt iste, ex quis placeat, itaque
-        perferendis dolore laboriosam amet repellat veritatis sequi error! Voluptatem esse laboriosam eum ipsa, dolor
-        neque eos magnam qui.
-    </p>
+    <p>{{post.content}}</p>
 
     <p-divider></p-divider>
     <div class="p-d-flex p-jc-between">

@@ -19,7 +19,7 @@ export class PostFormComponent implements OnInit {
 
     public post(): void {
         this.postsService
-            .post({ author: this.authService.user$.value!, content: this.content.value })
+            .create({ author: this.authService.user$.value!, content: this.content.value })
             .subscribe((res) => console.log(res));
     }
 }
