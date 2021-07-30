@@ -1,6 +1,5 @@
 import { Module } from "@nestjs/common";
 import { AuthModule } from "./auth/auth.module";
-import { CommentsModule } from "./comments/comments.module";
 import { ConfigModule } from "@nestjs/config";
 import { PostsModule } from "./posts/posts.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
@@ -12,6 +11,7 @@ import { join } from "path";
 // Entities
 import { User } from "./auth/users/user.entity";
 import { Post } from "./posts/post.entity";
+import { Comment } from "./comments/comment.entity";
 
 // Guards
 import { APP_GUARD } from "@nestjs/core";
@@ -31,11 +31,10 @@ import { JwtAuthGuard } from "./auth/jwt/jwt-auth.guard";
             username: "postgres",
             password: "postgres",
             database: "Groupomania",
-            entities: [User, Post],
+            entities: [User, Post, Comment],
             synchronize: true,
         }),
         PostsModule,
-        CommentsModule,
     ],
     controllers: [AppController],
     providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],
