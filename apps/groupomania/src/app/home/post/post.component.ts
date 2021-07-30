@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Post } from "@groupomania/dto";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { Post, SafeUser } from "@groupomania/dto";
 import { MenuItem } from "primeng/api";
+import { AuthService } from "../../auth/auth.service";
 import { PostsService } from "../posts.service";
 
 @Component({
@@ -10,20 +11,20 @@ import { PostsService } from "../posts.service";
     styleUrls: ["./post.component.scss"],
 })
 export class PostComponent implements OnInit {
-    public commentForm!: FormGroup;
     public items!: MenuItem[];
-    public liked: boolean = false;
-    public likes: string[] = [];
-    public commentFormShown: boolean = false;
-    public comments: string[] = [];
     @Input() public post!: Post;
+    public isliked: boolean = false;
+    public likes: SafeUser[] = [];
+    public commentMessage!: FormControl;
+    public displayComments: boolean = false;
+    public commentFormShown: boolean = false;
 
-    constructor(private fb: FormBuilder, private postsService: PostsService) {}
+    constructor(private authService: AuthService, private fb: FormBuilder, private postsService: PostsService) {}
 
     ngOnInit(): void {
-        this.commentForm = this.fb.group({
-            comment: ["", Validators.required],
-        });
+        this.initLikes();
+
+        this.commentMessage = this.fb.control("", Validators.required);
 
         this.items = [
             {
@@ -36,27 +37,35 @@ export class PostComponent implements OnInit {
                 command: () => this.postsService.delete(this.post.id).subscribe(),
             },
         ];
+    }
 
-        console.log(this.post);
+    public initLikes(): void {
+        this.likes = this.post.likes || [];
+        this.isliked = !!this.likes.find((user) => user.id == this.authService.user$.value!.id);
     }
 
     public like(): void {
-        this.liked = !this.liked;
+        const connectedUser = this.authService.user$.value!;
+        this.isliked = !this.isliked;
 
-        if (this.liked) {
-            this.likes.push("me");
+        if (this.isliked) {
+            this.likes.push(connectedUser);
         } else {
-            this.likes = this.likes.filter((like) => like != "me");
+            this.likes = this.likes.filter((user) => user.id != connectedUser.id);
         }
+
+        this.postsService.updateLikes({ ...this.post, likes: this.likes }).subscribe();
     }
+
+    public showComments(): void {}
 
     public showCommentForm(commentTextArea: HTMLTextAreaElement): void {
         this.commentFormShown = true;
-        setTimeout(() => commentTextArea.focus(), 0);
+        setTimeout(() => commentTextArea.focus(), 0); // Fix display bug where the input hasn't it's normal height
     }
 
-    public postComment(): void {
-        this.comments.push(this.commentForm.controls.comment.value);
-        this.commentForm.reset();
+    public sendComment(): void {
+        this.post.comments.push();
+        this.commentMessage.reset();
     }
 }

@@ -1,4 +1,4 @@
-<form (ngSubmit)="post()">
+<form (ngSubmit)="createPost()">
     <p-card styleClass="p-shadow-2 p-mb-5">
         <div class="p-d-flex">
             <p-avatar class="p-mr-3" image="assets/users/user-default.png" shape="circle" size="large"></p-avatar>
@@ -7,13 +7,13 @@
                 style="flex: 1;"
                 [autoResize]="true"
                 placeholder="Quoi de neuf ?"
-                [formControl]="content"
+                [formControl]="postContent"
             ></textarea>
         </div>
 
         <ng-template pTemplate="footer">
             <div class="p-d-flex p-jc-end">
-                <button pButton pRipple label="Publier" icon="pi pi-send" [disabled]="!content.valid"></button>
+                <button pButton pRipple label="Publier" icon="pi pi-send" [disabled]="!postContent.valid"></button>
             </div>
         </ng-template>
     </p-card>

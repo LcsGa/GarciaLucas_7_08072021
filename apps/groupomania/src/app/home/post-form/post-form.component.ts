@@ -9,17 +9,18 @@ import { PostsService } from "../posts.service";
     styleUrls: ["./post-form.component.scss"],
 })
 export class PostFormComponent implements OnInit {
-    public content!: FormControl;
+    public postContent!: FormControl;
 
     constructor(private fb: FormBuilder, private postsService: PostsService, private authService: AuthService) {}
 
     ngOnInit(): void {
-        this.content = this.fb.control("", Validators.required);
+        this.postContent = this.fb.control("", Validators.required);
     }
 
-    public post(): void {
+    public createPost(): void {
         this.postsService
-            .create({ author: this.authService.user$.value!, content: this.content.value })
-            .subscribe((res) => console.log(res));
+            .create({ author: this.authService.user$.value!, content: this.postContent.value })
+            .subscribe(() => this.postsService.fetch().subscribe());
+        this.postContent.reset();
     }
 }

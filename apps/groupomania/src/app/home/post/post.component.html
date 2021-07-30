@@ -25,11 +25,11 @@
     <div class="p-d-flex p-jc-between">
         <div class="p-d-flex p-ai-center">
             <p-button
-                [styleClass]="liked ? 'p-mr-2 p-button-text p-button-danger' : 'p-mr-2 p-button-text p-button-secondary'"
+                [styleClass]="isliked ? 'p-mr-2 p-button-text p-button-danger' : 'p-mr-2 p-button-text p-button-secondary'"
                 icon="pi pi-heart"
                 label="J'aime"
                 [badge]="likes.length ? likes.length + '' : ''"
-                [badgeClass]="liked ? 'p-badge-danger' : 'p-badge-secondary'"
+                [badgeClass]="isliked ? 'p-badge-danger' : 'p-badge-secondary'"
                 (click)="like()"
             ></p-button>
             <button
@@ -45,20 +45,18 @@
         <button
             pButton
             pRipple
-            [class]="comments.length ? 'p-button-link' : 'p-d-none'"
-            [label]="comments.length + (comments.length > 1 ? ' commentaires' : ' commentaire')"
-        ></button>
+            [class]="post.comments.length ? 'p-button-secondary p-button-text' : 'p-d-none'"
+            (click)="showComments()"
+        >
+            {{post.comments.length + (post.comments.length > 1 ? ' commentaires' : ' commentaire')}}
+        </button>
     </div>
 
-    <div *ngFor="let comment of comments">
+    <div *ngFor="let comment of post.comments">
         <p>{{comment}}</p>
     </div>
 
-    <form
-        [class]="commentFormShown ? 'p-mt-3 p-d-flex p-ai-center' : 'p-d-none'"
-        [formGroup]="commentForm"
-        (ngSubmit)="postComment()"
-    >
+    <form [class]="commentFormShown ? 'p-mt-3 p-d-flex p-ai-center' : 'p-d-none'" (ngSubmit)="sendComment()">
         <p-avatar class="p-mr-3" image="assets/users/user-default.png" shape="circle"></p-avatar>
         <textarea
             #commentTextArea
@@ -67,14 +65,14 @@
             [autoResize]="true"
             rows="1"
             placeholder="Ecrivez un commentaire..."
-            formControlName="comment"
+            [formControl]="commentMessage"
         ></textarea>
         <button
             pButton
             pRipple
             class="p-ml-2 p-button-icon p-button-rounded"
             icon="pi pi-send"
-            [disabled]="!commentForm.valid"
+            [disabled]="!commentMessage.valid"
         ></button>
     </form>
 </p-card>
