@@ -1,4 +1,4 @@
-// User
+//* START: users_____________________________________________________
 export class SigninUserDto {
     email!: string;
     password!: string;
@@ -14,8 +14,9 @@ export class User extends CreateUserDto {
 }
 
 export type SafeUser = Omit<User, "password">;
+//* END: users_______________________________________________________
 
-// posts
+//* START: posts_____________________________________________________
 export class CreatePostDto {
     author!: SafeUser;
     content!: string;
@@ -24,4 +25,22 @@ export class CreatePostDto {
 export class Post extends CreatePostDto {
     readonly id!: string;
     readonly created_at!: Date;
+    likes!: SafeUser[];
+    comments!: Comment[];
 }
+
+export type UpdatePostDto = Partial<Post>;
+//* END: posts_______________________________________________________
+
+//* START: comments__________________________________________________
+export class CreateCommentDto {
+    authorId!: string;
+    postId!: string;
+    message!: string;
+}
+
+export class Comment extends CreateCommentDto {
+    readonly id!: string;
+    readonly created_at!: Date;
+}
+//* END: comments____________________________________________________
