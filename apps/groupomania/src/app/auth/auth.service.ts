@@ -44,7 +44,7 @@ export class AuthService {
     }
 
     public refreshAccessToken(): Subscription {
-        const refreshDelay = 5 * 1000; // 5min
+        const refreshDelay = 5 * 60 * 1000; // 5min
         return timer(refreshDelay, refreshDelay)
             .pipe(
                 switchMap(() => {

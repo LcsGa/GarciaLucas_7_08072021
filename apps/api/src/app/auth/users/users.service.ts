@@ -9,15 +9,19 @@ import * as bcrypt from "bcrypt";
 export class UsersService {
     constructor(@InjectRepository(User) private usersRepository: Repository<User>) {}
 
-    public async create(user: CreateUserDto): Promise<User> {
+    public async create(createUserDto: CreateUserDto): Promise<User> {
         const createdUser = {
-            ...user,
-            password: await bcrypt.hash(user.password, 10),
+            ...createUserDto,
+            password: await bcrypt.hash(createUserDto.password, 10),
         };
         return await this.usersRepository.save(createdUser);
     }
 
     public async findByEmail(email: string): Promise<User> {
-        return (await this.usersRepository.find({ email }))[0];
+        return await this.usersRepository
+            .createQueryBuilder("user")
+            .where("user.email = :email", { email: email })
+            .addSelect("user.password")
+            .getOne();
     }
 }

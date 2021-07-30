@@ -18,11 +18,11 @@ export class AuthService {
         private configService: ConfigService
     ) {}
 
-    public async validateUser(email: string, pass: string): Promise<SafeUser> {
-        const user = await this.usersService.findByEmail(email);
+    public async validateUser(signinUserDto: SigninUserDto): Promise<SafeUser> {
+        const user = await this.usersService.findByEmail(signinUserDto.email);
 
         if (user) {
-            const isPasswordValid = await bcrypt.compare(pass, user.password);
+            const isPasswordValid = await bcrypt.compare(signinUserDto.password, user.password);
 
             if (isPasswordValid) {
                 const { password, ...result } = user;
@@ -38,7 +38,7 @@ export class AuthService {
     }
 
     public async signin(signinUser: SigninUserDto): Promise<{ user: SafeUser; access_token: string }> {
-        const user = await this.validateUser(signinUser.email, signinUser.password);
+        const user = await this.validateUser(signinUser);
 
         if (user) {
             return {
