@@ -7,7 +7,9 @@ import * as bcrypt from "bcrypt";
 
 @Injectable()
 export class UsersService {
-    constructor(@InjectRepository(User) private usersRepository: Repository<User>) {}
+    constructor(
+        @InjectRepository(User) private usersRepository: Repository<User>
+    ) {}
 
     public async create(createUserDto: CreateUserDto): Promise<User> {
         const createdUser = {
@@ -23,5 +25,9 @@ export class UsersService {
             .where("user.email = :email", { email: email })
             .addSelect("user.password")
             .getOne();
+    }
+
+    public async findById(id: string): Promise<User> {
+        return await this.usersRepository.findOne(id);
     }
 }
