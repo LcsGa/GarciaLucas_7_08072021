@@ -1,0 +1,19 @@
+<form class="p-mt-3 p-d-flex p-ai-center" (ngSubmit)="sendComment()">
+    <p-avatar class="p-mr-3" image="assets/users/user-default.png" shape="circle"></p-avatar>
+    <textarea
+        appFocus
+        pInputTextarea
+        style="flex: 1"
+        [autoResize]="true"
+        rows="1"
+        placeholder="Ecrivez un commentaire..."
+        [formControl]="commentMessage"
+    ></textarea>
+    <button
+        pButton
+        pRipple
+        class="p-ml-2 p-button-icon p-button-rounded"
+        icon="pi pi-send"
+        [disabled]="!commentMessage.valid"
+    ></button>
+</form>

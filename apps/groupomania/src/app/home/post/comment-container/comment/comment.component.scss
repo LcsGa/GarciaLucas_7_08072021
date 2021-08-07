@@ -1,0 +1,12 @@
+.comment {
+    border-radius: 10px;
+    background: var(--surface-50);
+
+    &:hover .comment__actions {
+        display: block;
+    }
+
+    &__actions {
+        display: none;
+    }
+}

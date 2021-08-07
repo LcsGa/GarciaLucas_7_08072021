@@ -1,6 +1,6 @@
 import { SafeUser } from "libs/dto/src/lib/dto";
 import { User } from "../auth/users/user.entity";
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Post } from "../posts/post.entity";
 
 @Entity()
@@ -14,7 +14,7 @@ export class Comment {
     @ManyToOne(() => Post, (post) => post.comments)
     post: Post;
 
-    @ManyToOne(() => User, (user) => user.comments)
+    @ManyToOne(() => User, (user) => user.comments, { eager: true })
     author: SafeUser;
 
     @Column({ nullable: false })

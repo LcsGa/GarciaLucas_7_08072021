@@ -34,8 +34,8 @@ export type UpdatePostDto = Partial<Post>;
 
 //* START: comments__________________________________________________
 export class CreateCommentDto {
-    authorId!: string;
-    postId!: string;
+    author!: SafeUser;
+    post!: Post;
     message!: string;
 }
 
@@ -43,4 +43,6 @@ export class Comment extends CreateCommentDto {
     readonly id!: string;
     readonly created_at!: Date;
 }
+
+export type UpdateCommentDto = Partial<Comment> & { postId: string };
 //* END: comments____________________________________________________

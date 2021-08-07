@@ -1,0 +1,42 @@
+<div class="p-d-flex p-jc-between p-pb-4">
+    <div class="p-d-flex">
+        <p-avatar class="p-mr-3" image="assets/users/user-default.png" shape="circle"></p-avatar>
+        <div>
+            <p class="p-text-bold">{{ post.author.firstname }} {{ post.author.lastname }}</p>
+            <small>{{ post.created_at | date: "dd MMMM YYYY, HH:mm":"":"fr" }}</small>
+        </div>
+    </div>
+
+    <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
+    <button
+        pButton
+        pRipple
+        class="p-button-secondary p-button-icon p-button-rounded p-button-text"
+        type="button"
+        icon="pi pi-ellipsis-h"
+        (click)="menu.toggle($event)"
+    ></button>
+</div>
+
+<p *ngIf="!inModification">{{ post.content }}</p>
+
+<div class="p-d-flex" *ngIf="inModification">
+    <textarea pInputTextarea style="flex: 1" [rows]="1" [autoResize]="true" [formControl]="postContent"></textarea>
+
+    <div class="p-d-flex p-flex-column p-ml-2">
+        <button
+            pButton
+            pRipple
+            class="p-mb-2 p-button-danger p-button-icon p-button-rounded button-small"
+            icon="pi pi-times"
+            (click)="cancelModifications()"
+        ></button>
+        <button
+            pButton
+            pRipple
+            class="p-button-icon p-button-rounded button-small"
+            icon="pi pi-check"
+            (click)="saveModifications()"
+        ></button>
+    </div>
+</div>

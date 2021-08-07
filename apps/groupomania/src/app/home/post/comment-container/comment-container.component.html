@@ -1,0 +1,5 @@
+<div *ngFor="let comment of post.comments; let last = last">
+    <groupomania-comment [postId]="post.id" [comment]="comment" [last]="last"></groupomania-comment>
+</div>
+
+<groupomania-comment-form [post]="post" *ngIf="commentFormShown"></groupomania-comment-form>
