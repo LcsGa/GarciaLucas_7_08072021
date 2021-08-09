@@ -9,8 +9,12 @@
                 chooseIcon="pi pi-image"
                 chooseLabel="Modifier la photo"
                 accept="image/*"
+                [maxFileSize]="1000000"
+                invalidFileSizeMessageSummary="Limite dépassée"
+                invalidFileSizeMessageDetail="La taille de l'image ne doit pas dépasser 1MB"
                 [auto]="true"
                 [customUpload]="true"
+                (uploadHandler)="appendImage($event, fileUpload)"
             ></p-fileUpload>
         </div>
     </ng-template>
