@@ -3,19 +3,26 @@
  * This is only a minimal backend to get started.
  */
 
-import { Logger } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+import { Logger } from "@nestjs/common";
+import { NestFactory } from "@nestjs/core";
+import { NestExpressApplication } from "@nestjs/platform-express";
+import { join } from "path";
 
-import { AppModule } from './app/app.module';
+import { AppModule } from "./app/app.module";
+import { environment } from "./environments/environment";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  const globalPrefix = 'api';
-  app.setGlobalPrefix(globalPrefix);
-  const port = process.env.PORT || 3333;
-  await app.listen(port, () => {
-    Logger.log('Listening at http://localhost:' + port + '/' + globalPrefix);
-  });
+    const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+    const globalPrefix = "api";
+    app.setGlobalPrefix(globalPrefix);
+
+    app.useStaticAssets(join(environment.projectDir, "assets"));
+
+    const port = process.env.PORT || 3333;
+    await app.listen(port, () => {
+        Logger.log("Listening at http://localhost:" + port + "/" + globalPrefix);
+    });
 }
 
 bootstrap();

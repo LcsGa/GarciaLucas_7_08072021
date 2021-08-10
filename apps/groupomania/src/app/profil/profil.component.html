@@ -13,8 +13,8 @@
                 invalidFileSizeMessageSummary="Limite dépassée"
                 invalidFileSizeMessageDetail="La taille de l'image ne doit pas dépasser 1MB"
                 [auto]="true"
-                [customUpload]="true"
-                (uploadHandler)="appendImage($event, fileUpload)"
+                name="avatar"
+                url="./api/users/avatar"
             ></p-fileUpload>
         </div>
     </ng-template>
