@@ -1,7 +1,8 @@
 <form (ngSubmit)="createPost()">
     <p-card styleClass="p-shadow-2 p-mb-5">
         <div class="p-d-flex">
-            <p-avatar class="p-mr-3" image="assets/users/user-default.png" shape="circle" size="large"></p-avatar>
+            <groupomania-avatar class="p-mr-3" [size]="'large'"></groupomania-avatar>
+
             <textarea
                 pInputTextarea
                 style="flex: 1;"

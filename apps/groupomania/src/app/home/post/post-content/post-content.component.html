@@ -1,6 +1,6 @@
 <div class="p-d-flex p-jc-between p-pb-4">
     <div class="p-d-flex">
-        <p-avatar class="p-mr-3" image="assets/users/user-default.png" shape="circle"></p-avatar>
+        <groupomania-avatar class="p-mr-3" [userId]="post.author.id"></groupomania-avatar>
         <div>
             <p class="p-text-bold">{{ post.author.firstname }} {{ post.author.lastname }}</p>
             <small>{{ post.created_at | date: "dd MMMM YYYY, HH:mm":"":"fr" }}</small>
@@ -21,7 +21,7 @@
 <p *ngIf="!inModification">{{ post.content }}</p>
 
 <div class="p-d-flex" *ngIf="inModification">
-    <textarea pInputTextarea style="flex: 1" [rows]="1" [autoResize]="true" [formControl]="postContent"></textarea>
+    <textarea pInputTextarea style="flex: 1;" [rows]="1" [autoResize]="true" [formControl]="postContent"></textarea>
 
     <div class="p-d-flex p-flex-column p-ml-2">
         <button

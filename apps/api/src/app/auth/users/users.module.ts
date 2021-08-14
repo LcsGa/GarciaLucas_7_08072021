@@ -16,7 +16,7 @@ import { environment } from "apps/api/src/environments/environment";
         MulterModule.register({
             storage: multer.diskStorage({
                 destination: (_req, _file, cb) => cb(null, join(environment.projectDir, "assets/users")),
-                filename: (req, file, cb) => cb(null, `${req.user.userId}.${file.mimetype.split("/")[1]}`),
+                filename: (req, _file, cb) => cb(null, `${req.user.userId}.jpg`),
             }),
         }),
         TypeOrmModule.forFeature([User]),

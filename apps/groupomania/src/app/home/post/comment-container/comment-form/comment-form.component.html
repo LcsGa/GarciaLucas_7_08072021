@@ -1,9 +1,10 @@
 <form class="p-mt-3 p-d-flex p-ai-center" (ngSubmit)="sendComment()">
-    <p-avatar class="p-mr-3" image="assets/users/user-default.png" shape="circle"></p-avatar>
+    <groupomania-avatar class="p-mr-3"></groupomania-avatar>
+
     <textarea
         appFocus
         pInputTextarea
-        style="flex: 1"
+        style="flex: 1;"
         [autoResize]="true"
         rows="1"
         placeholder="Ecrivez un commentaire..."

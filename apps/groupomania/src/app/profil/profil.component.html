@@ -1,10 +1,10 @@
 <p-card styleClass="p-shadow-2">
     <ng-template pTemplate="header">
         <div class="p-pt-3 p-d-flex p-flex-column p-ai-center">
-            <p-avatar class="p-mr-3" image="assets/users/user-default.png" size="xlarge" shape="circle"></p-avatar>
+            <groupomania-avatar class="p-mb-1" [size]="'xlarge'"></groupomania-avatar>
+
             <p-fileUpload
-                #fileUpload
-                styleClass="p-mr-3 p-button-text p-button-secondary"
+                styleClass="p-button-text p-button-secondary"
                 mode="basic"
                 chooseIcon="pi pi-image"
                 chooseLabel="Modifier la photo"

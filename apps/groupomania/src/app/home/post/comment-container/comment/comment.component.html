@@ -1,11 +1,12 @@
 <div [class]="'comment p-px-3 p-py-2 ' + (last ? '' : 'p-mb-2')">
     <div class="p-d-flex p-jc-between">
         <div>
-            <div class="p-d-flex">
-                <h4>{{ comment.author.firstname }} {{ comment.author.lastname }}</h4>
-                <p class="p-ml-1">
-                    - <small>{{ comment.created_at | date: "dd MMMM YYYY, HH:mm":"":"fr" }}</small>
-                </p>
+            <div class="p-d-flex p-mb-2">
+                <groupomania-avatar class="p-mr-3" [userId]="comment.author.id"></groupomania-avatar>
+                <div>
+                    <h4>{{ comment.author.firstname }} {{ comment.author.lastname }}</h4>
+                    <small>{{ comment.created_at | date: "dd MMMM YYYY, HH:mm":"":"fr" }}</small>
+                </div>
             </div>
 
             <p *ngIf="!inModification">{{ comment.message }}</p>
@@ -13,7 +14,7 @@
             <div class="p-d-flex" *ngIf="inModification">
                 <textarea
                     pInputTextarea
-                    style="flex: 1"
+                    style="flex: 1;"
                     [rows]="1"
                     [autoResize]="true"
                     [formControl]="commentMessage"
