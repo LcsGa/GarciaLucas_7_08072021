@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { BehaviorSubject, Observable, of, Subscription, switchMap, tap, timer } from "rxjs";
 import { CreateUserDto, SafeUser, SigninUserDto } from "../../../../../libs/dto/src";
 import { environment } from "../../environments/environment";

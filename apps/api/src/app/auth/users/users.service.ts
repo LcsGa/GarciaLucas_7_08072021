@@ -4,12 +4,13 @@ import { CreateUserDto } from "libs/dto/src/lib/dto";
 import { Repository } from "typeorm";
 import { User } from "./user.entity";
 import * as bcrypt from "bcrypt";
+import * as fs from "fs";
+import { environment } from "apps/api/src/environments/environment";
+import { join } from "path";
 
 @Injectable()
 export class UsersService {
-    constructor(
-        @InjectRepository(User) private usersRepository: Repository<User>
-    ) {}
+    constructor(@InjectRepository(User) private usersRepository: Repository<User>) {}
 
     public async create(createUserDto: CreateUserDto): Promise<User> {
         const createdUser = {
@@ -29,5 +30,14 @@ export class UsersService {
 
     public async findById(id: string): Promise<User> {
         return await this.usersRepository.findOne(id);
+    }
+
+    public getAvatarURL(userId: string): string {
+        const avatarPath = `/users/${userId}.jpg`;
+        const hasAvatar = fs.existsSync(join(environment.projectDir, "assets", avatarPath));
+
+        if (hasAvatar) {
+            return "/api" + avatarPath;
+        }
     }
 }

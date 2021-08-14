@@ -6,7 +6,9 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AppController } from "./app.controller";
 
+// utils
 import { join } from "path";
+import { environment } from "../environments/environment";
 
 // Entities
 import { User } from "./auth/users/user.entity";
@@ -21,9 +23,10 @@ import { JwtAuthGuard } from "./auth/jwt/jwt-auth.guard";
     imports: [
         AuthModule,
         ConfigModule.forRoot({
-            envFilePath: join(process.cwd(), "apps/api/src/environments/.env"),
+            envFilePath: join(environment.projectDir, "environments/.env"),
             isGlobal: true,
         }),
+        PostsModule,
         TypeOrmModule.forRoot({
             type: "postgres",
             host: "localhost",
@@ -34,7 +37,6 @@ import { JwtAuthGuard } from "./auth/jwt/jwt-auth.guard";
             entities: [User, Post, Comment],
             synchronize: true,
         }),
-        PostsModule,
     ],
     controllers: [AppController],
     providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],

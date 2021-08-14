@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { AvatarModule } from "../avatar/avatar.module";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PrimeModule } from "../shared/modules/prime.module";
@@ -31,6 +32,7 @@ const routes: Routes = [{ path: "", component: HomeComponent }];
         FocusDirective,
     ],
     imports: [
+        AvatarModule,
         CommonModule,
         FormsModule,
         PrimeModule,
