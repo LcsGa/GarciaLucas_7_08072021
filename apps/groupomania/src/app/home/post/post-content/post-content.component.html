@@ -1,6 +1,6 @@
 <div class="p-d-flex p-jc-between p-pb-4">
     <div class="p-d-flex">
-        <groupomania-avatar class="p-mr-3" [userId]="post.author.id"></groupomania-avatar>
+        <groupomania-avatar class="p-mr-3" [user]="post.author"></groupomania-avatar>
         <div>
             <p class="p-text-bold">{{ post.author.firstname }} {{ post.author.lastname }}</p>
             <small>{{ post.created_at | date: "dd MMMM YYYY, HH:mm":"":"fr" }}</small>

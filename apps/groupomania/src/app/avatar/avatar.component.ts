@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { SafeUser } from "@groupomania/dto";
 import { AuthService } from "../auth/auth.service";
 import { AvatarService } from "./avatar.service";
 
@@ -9,13 +10,13 @@ import { AvatarService } from "./avatar.service";
 })
 export class AvatarComponent implements OnInit {
     @Input() public size!: string;
-    @Input() public userId: string = this.authService.user$.value!.id;
+    @Input() public user: SafeUser = this.authService.user$.value!;
     private _avatarURL!: string;
 
     constructor(private authService: AuthService, private avatarService: AvatarService) {}
 
     ngOnInit(): void {
-        this.avatarService.getAvatarURL(this.userId).subscribe((avatar) => (this.avatarURL = avatar.URL));
+        this.avatarService.getAvatarURL(this.user.id).subscribe((avatar) => (this.avatarURL = avatar.URL));
     }
 
     set avatarURL(avatarURL: string) {
@@ -27,6 +28,6 @@ export class AvatarComponent implements OnInit {
     }
 
     public get userInitials(): string {
-        return this.authService.user$.value!.firstname[0] + this.authService.user$.value!.lastname[0];
+        return this.user.firstname[0] + this.user.lastname[0];
     }
 }

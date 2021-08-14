@@ -2,7 +2,7 @@
     <div class="p-d-flex p-jc-between">
         <div>
             <div class="p-d-flex p-mb-2">
-                <groupomania-avatar class="p-mr-3" [userId]="comment.author.id"></groupomania-avatar>
+                <groupomania-avatar class="p-mr-3" [user]="comment.author"></groupomania-avatar>
                 <div>
                     <h4>{{ comment.author.firstname }} {{ comment.author.lastname }}</h4>
                     <small>{{ comment.created_at | date: "dd MMMM YYYY, HH:mm":"":"fr" }}</small>
