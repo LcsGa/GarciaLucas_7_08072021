@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateUserDto } from "libs/dto/src/lib/dto";
+import { CreateUserDto, SafeUser, UpdateUserDto } from "libs/dto/src/lib/dto";
 import { Repository } from "typeorm";
 import { User } from "./user.entity";
 import * as bcrypt from "bcrypt";
@@ -39,5 +39,13 @@ export class UsersService {
         if (hasAvatar) {
             return "/api" + avatarPath;
         }
+    }
+
+    public async updateUser(updateUserDto: UpdateUserDto): Promise<SafeUser> {
+        return await this.usersRepository.save(updateUserDto);
+    }
+
+    public async deleteUser(id: string) {
+        return await this.usersRepository.delete(id);
     }
 }

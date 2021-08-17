@@ -11,10 +11,10 @@ export class Comment {
     @CreateDateColumn()
     created_at: Date;
 
-    @ManyToOne(() => Post, (post) => post.comments)
+    @ManyToOne(() => Post, (post) => post.comments, { onDelete: "CASCADE" })
     post: Post;
 
-    @ManyToOne(() => User, (user) => user.comments, { eager: true })
+    @ManyToOne(() => User, (user) => user.comments, { eager: true, onDelete: "CASCADE" })
     author: SafeUser;
 
     @Column({ nullable: false })
