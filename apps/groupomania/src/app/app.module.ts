@@ -14,7 +14,6 @@ import { JwtInterceptor } from "./shared/interceptors/jwt.interceptor";
 
 import { registerLocaleData } from "@angular/common";
 import localeFr from "@angular/common/locales/fr";
-import { AvatarComponent } from "./avatar/avatar.component";
 registerLocaleData(localeFr, "fr");
 
 const routes: Routes = [

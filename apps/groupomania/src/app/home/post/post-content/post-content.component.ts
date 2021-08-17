@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { Post } from "@groupomania/dto";
-import { MenuItem } from "primeng/api";
+import { ConfirmationService, MenuItem } from "primeng/api";
 import { AuthService } from "../../../auth/auth.service";
 import { PostsService } from "../../posts.service";
 
@@ -16,7 +16,12 @@ export class PostContentComponent implements OnInit {
     public postContent!: FormControl;
     public items!: MenuItem[];
 
-    constructor(private authService: AuthService, private postsService: PostsService, private fb: FormBuilder) {}
+    constructor(
+        private authService: AuthService,
+        private postsService: PostsService,
+        private fb: FormBuilder,
+        private confirmService: ConfirmationService
+    ) {}
 
     ngOnInit(): void {
         this.items = [
@@ -30,7 +35,12 @@ export class PostContentComponent implements OnInit {
                 label: "Supprimer",
                 icon: "pi pi-trash",
                 visible: this.postsService.isUserTheAuthor(this.post.author.id, this.authService.user$.value!.id),
-                command: () => this.postsService.delete(this.post.id).subscribe(),
+                command: () =>
+                    this.confirmService.confirm({
+                        header: "Suppression du poste",
+                        message: "Voulez-vous confirmer la suppression de votre poste ?",
+                        accept: () => this.postsService.delete(this.post.id).subscribe(),
+                    }),
             },
             {
                 label: "Signaler",

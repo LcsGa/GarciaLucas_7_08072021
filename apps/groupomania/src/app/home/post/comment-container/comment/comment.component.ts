@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { Comment } from "@groupomania/dto";
 import { AuthService } from "apps/groupomania/src/app/auth/auth.service";
-import { MenuItem } from "primeng/api";
+import { ConfirmationService, MenuItem } from "primeng/api";
 import { PostsService } from "../../../posts.service";
 
 @Component({
@@ -18,7 +18,12 @@ export class CommentComponent implements OnInit {
     public items!: MenuItem[];
     public inModification = false;
 
-    constructor(private postsService: PostsService, private authService: AuthService, private fb: FormBuilder) {}
+    constructor(
+        private postsService: PostsService,
+        private authService: AuthService,
+        private fb: FormBuilder,
+        private confirmService: ConfirmationService
+    ) {}
 
     ngOnInit(): void {
         this.items = [
@@ -33,9 +38,14 @@ export class CommentComponent implements OnInit {
                 icon: "pi pi-trash",
                 visible: this.postsService.isUserTheAuthor(this.comment.author.id, this.authService.user$.value!.id),
                 command: () =>
-                    this.postsService
-                        .deleteComment(this.comment.id)
-                        .subscribe(() => this.postsService.fetch().subscribe()),
+                    this.confirmService.confirm({
+                        header: "Suppression du commentaire",
+                        message: "Voulez-vous confirmer la suppression de votre commentaire ?",
+                        accept: () =>
+                            this.postsService
+                                .deleteComment(this.comment.id)
+                                .subscribe(() => this.postsService.fetch().subscribe()),
+                    }),
             },
             {
                 label: "Signaler",
