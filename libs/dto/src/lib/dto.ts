@@ -14,6 +14,8 @@ export class User extends CreateUserDto {
 }
 
 export type SafeUser = Omit<User, "password">;
+
+export type UpdateUserDto = Partial<SafeUser>;
 //* END: users_______________________________________________________
 
 //* START: posts_____________________________________________________

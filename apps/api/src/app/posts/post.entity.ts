@@ -19,16 +19,16 @@ export class Post {
     @CreateDateColumn()
     created_at: Date;
 
-    @ManyToOne(() => User, { eager: true })
+    @ManyToOne(() => User, { eager: true, onDelete: "CASCADE" })
     author: User;
 
     @Column({ nullable: false })
     content: string;
 
-    @ManyToMany(() => User, { eager: true })
+    @ManyToMany(() => User, { eager: true, onDelete: "CASCADE" })
     @JoinTable()
     likes: User[];
 
-    @OneToMany(() => Comment, (comment) => comment.post, { eager: true })
+    @OneToMany(() => Comment, (comment) => comment.post, { eager: true, onDelete: "CASCADE" })
     comments: Comment[];
 }

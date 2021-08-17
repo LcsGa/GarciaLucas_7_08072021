@@ -1,3 +1,12 @@
+<p-toast></p-toast>
+
+<p-confirmDialog
+    header="Suppression du compte"
+    acceptLabel="Confirmer la suppression"
+    rejectLabel="Annuler la suppression"
+    icon="pi pi-exclamation-triangle"
+></p-confirmDialog>
+
 <p-card styleClass="p-shadow-2">
     <ng-template pTemplate="header">
         <div class="p-pt-3 p-d-flex p-flex-column p-ai-center">
@@ -22,27 +31,21 @@
         </div>
     </ng-template>
 
-    <div class="p-fluid p-d-flex p-flex-column">
+    <form class="p-fluid p-d-flex p-flex-column" [formGroup]="profilForm">
         <input class="p-field" type="text" pInputText formControlName="firstname" placeholder="Prénom" />
         <input class="p-field" type="text" pInputText formControlName="lastname" placeholder="Nom" />
-        <input
-            type="text"
-            pInputText
-            formControlName="email"
-            placeholder="Email"
-            [disabled]="true"
-            value="lcs.grc@outlook.com"
-        />
-    </div>
+        <input type="text" pInputText placeholder="Email" [disabled]="true" [value]="user.email" />
+    </form>
 
     <ng-template pTemplate="footer">
-        <button pButton pRipple class="p-mr-3" label="Enregistrer"></button>
+        <button pButton pRipple class="p-mr-3" label="Enregistrer" (click)="updateUser()"></button>
         <button
             pButton
             pRipple
             class="p-button-danger p-button-outlined"
             label="Supprimer le compte"
             icon="pi pi-trash"
+            (click)="deleteUser()"
         ></button>
     </ng-template>
 </p-card>

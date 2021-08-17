@@ -18,6 +18,6 @@ export class User {
     @Column({ nullable: false, select: false })
     password: string;
 
-    @OneToMany(() => Comment, (comment) => comment.author)
+    @OneToMany(() => Comment, (comment) => comment.author, { onDelete: "CASCADE" })
     comments: Comment[];
 }

@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject, Observable, of, Subscription, switchMap, tap, timer } from "rxjs";
-import { CreateUserDto, SafeUser, SigninUserDto } from "../../../../../libs/dto/src";
+import { CreateUserDto, SafeUser, SigninUserDto, UpdateUserDto } from "../../../../../libs/dto/src";
 import { environment } from "../../environments/environment";
 
 @Injectable({
@@ -31,6 +31,14 @@ export class AuthService {
                 this.tokenSubscription = this.refreshAccessToken();
             })
         );
+    }
+
+    public updateUser(updateUserDto: UpdateUserDto): Observable<SafeUser> {
+        return this.http.patch<SafeUser>("/api/users", updateUserDto).pipe(tap((user) => this.user$.next(user)));
+    }
+
+    public deleteUser(id: string) {
+        return this.http.delete<any>("api/users/" + id);
     }
 
     public isSignedIn(): boolean {
