@@ -1,4 +1,4 @@
-<p-menubar [model]="items">
+<p-menubar [model]="(items$ | async)!">
     <ng-template pTemplate="start">
         <img
             class="p-d-none p-d-sm-block p-mr-5"

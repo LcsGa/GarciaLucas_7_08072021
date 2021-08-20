@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { MenuItem } from "primeng/api";
 import { AuthService } from "../../../auth/auth.service";
+import { HeaderService } from "./header.service";
 
 @Component({
     selector: "groupomania-header",
@@ -8,28 +8,18 @@ import { AuthService } from "../../../auth/auth.service";
     styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
-    public items!: MenuItem[];
-    public isVisible = false;
+    public user$ = this.authService.user$;
+    public items$ = this.headerService.items$;
 
-    constructor(private authService: AuthService) {}
+    constructor(private headerService: HeaderService, private authService: AuthService) {}
 
     ngOnInit(): void {
-        this.items = [
-            {
-                label: "Accueil",
-                icon: "pi pi-home",
-                routerLink: "/home",
-            },
-            {
-                label: "Profil",
-                icon: "pi pi-user",
-                routerLink: "/profil",
-            },
-            {
-                label: "Déconnexion",
-                icon: "pi pi-sign-out",
-                command: () => this.authService.logout(),
-            },
-        ];
+        this.user$.subscribe((user) => {
+            if (user) {
+                this.headerService.initMenuBar();
+            } else {
+                this.headerService.removeMenuBar();
+            }
+        });
     }
 }
