@@ -1,4 +1,4 @@
-import { Inject, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateCommentDto, CreatePostDto, UpdateCommentDto, UpdatePostDto } from "libs/dto/src/lib/dto";
 import { Repository } from "typeorm";
