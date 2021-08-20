@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { SafeUser } from "@groupomania/dto";
-import { AuthService } from "../auth/auth.service";
+import { AuthService } from "../../../auth/auth.service";
 import { AvatarService } from "./avatar.service";
 
 @Component({

@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { AvatarModule } from "../avatar/avatar.module";
+import { AvatarModule } from "../shared/components/avatar/avatar.module";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PrimeModule } from "../shared/modules/prime.module";
@@ -15,6 +15,7 @@ import { PostToolbarComponent } from "./post/post-toolbar/post-toolbar.component
 import { CommentContainerComponent } from "./post/comment-container/comment-container.component";
 import { CommentComponent } from "./post/comment-container/comment/comment.component";
 import { CommentFormComponent } from "./post/comment-container/comment-form/comment-form.component";
+
 import { FocusDirective } from "../shared/directives/focus.directive";
 
 const routes: Routes = [{ path: "", component: HomeComponent }];

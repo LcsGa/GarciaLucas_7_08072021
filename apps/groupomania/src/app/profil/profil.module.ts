@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { AvatarModule } from "../avatar/avatar.module";
+import { AvatarModule } from "../shared/components/avatar/avatar.module";
 import { CommonModule } from "@angular/common";
 import { PrimeModule } from "../shared/modules/prime.module";
 import { ProgressSpinnerModule } from "primeng/progressspinner";

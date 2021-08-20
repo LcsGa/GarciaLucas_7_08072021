@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { PrimeModule } from "../shared/modules/prime.module";
+import { PrimeModule } from "../../modules/prime.module";
 
 import { AvatarComponent } from "./avatar.component";
 
