@@ -16,11 +16,7 @@ export class AvatarComponent implements OnInit {
     constructor(private authService: AuthService, private avatarService: AvatarService) {}
 
     ngOnInit(): void {
-        this.avatarService.getAvatarURL(this.user.id).subscribe((avatar) => (this.avatarURL = avatar.URL));
-    }
-
-    set avatarURL(avatarURL: string) {
-        this._avatarURL = avatarURL;
+        this.avatarService.getAvatarURL(this.user.id).subscribe((avatar) => (this._avatarURL = avatar.URL));
     }
 
     get avatarURL(): string {
