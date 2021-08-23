@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
 import { AuthService } from "../auth.service";
 
 @Component({
@@ -12,7 +11,7 @@ export class SigninComponent implements OnInit {
     public form!: FormGroup;
     public hasSigninFailed = false;
 
-    constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
+    constructor(private fb: FormBuilder, private authService: AuthService) {}
 
     ngOnInit(): void {
         this.form = this.fb.group({
