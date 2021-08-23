@@ -53,7 +53,7 @@ export class AuthService {
         return await this.usersService.create(user);
     }
 
-    public async refreshAccessToken(req: Request): Promise<{ user: User; access_token: string } | void> {
+    public async refreshAccessToken(req: Request): Promise<{ user: SafeUser; access_token: string } | void> {
         const token = req.headers.authorization.slice("Bearer ".length);
 
         try {
