@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { Comment } from "@groupomania/dto";
 import { AuthService } from "apps/groupomania/src/app/auth/auth.service";
 import { ConfirmationService, MenuItem } from "primeng/api";
-import { PostsService } from "../../../posts.service";
+import { PostsService } from "../../posts.service";
 
 @Component({
     selector: "groupomania-comment",
@@ -16,6 +16,7 @@ export class CommentComponent implements OnInit {
     @Input() public last!: boolean;
     public commentMessage!: FormControl;
     public items!: MenuItem[];
+    public displayMenu!: boolean;
     public inModification = false;
 
     constructor(
@@ -26,17 +27,19 @@ export class CommentComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.displayMenu = this.authService.isAuthorOrAdmin(this.comment.author.id);
+
         this.items = [
             {
                 label: "Modifier",
                 icon: "pi pi-pencil",
-                visible: this.postsService.isUserTheAuthor(this.comment.author.id, this.authService.user$.value!.id),
+                visible: this.postsService.canModify(this.comment.author.id, this.authService.user$.value!),
                 command: () => this.toggleModificationMode(),
             },
             {
                 label: "Supprimer",
                 icon: "pi pi-trash",
-                visible: this.postsService.isUserTheAuthor(this.comment.author.id, this.authService.user$.value!.id),
+                visible: this.postsService.canDelete(this.comment.author.id, this.authService.user$.value!),
                 command: () =>
                     this.confirmService.confirm({
                         header: "Suppression du commentaire",
@@ -44,13 +47,8 @@ export class CommentComponent implements OnInit {
                         accept: () =>
                             this.postsService
                                 .deleteComment(this.comment.id)
-                                .subscribe(() => this.postsService.fetch().subscribe()),
+                                .subscribe(() => this.postsService.findAll().subscribe()),
                     }),
-            },
-            {
-                label: "Signaler",
-                icon: "pi pi-shield",
-                visible: !this.postsService.isUserTheAuthor(this.comment.author.id, this.authService.user$.value!.id),
             },
         ];
 
@@ -64,7 +62,7 @@ export class CommentComponent implements OnInit {
     public saveModifications(): void {
         this.postsService
             .updateComment({ id: this.comment.id, message: this.commentMessage.value, postId: this.postId })
-            .subscribe(() => this.postsService.fetch().subscribe());
+            .subscribe(() => this.postsService.findAll().subscribe());
     }
 
     public cancelModifications(): void {

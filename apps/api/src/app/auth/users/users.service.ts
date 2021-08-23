@@ -20,16 +20,20 @@ export class UsersService {
         return await this.usersRepository.save(createdUser);
     }
 
+    public async findAll(): Promise<SafeUser[]> {
+        return await this.usersRepository.find();
+    }
+
+    public async findById(id: string): Promise<SafeUser> {
+        return await this.usersRepository.findOne(id);
+    }
+
     public async findByEmail(email: string): Promise<User> {
         return await this.usersRepository
             .createQueryBuilder("user")
             .where("user.email = :email", { email: email })
             .addSelect("user.password")
             .getOne();
-    }
-
-    public async findById(id: string): Promise<User> {
-        return await this.usersRepository.findOne(id);
     }
 
     public getAvatarURL(userId: string): string {

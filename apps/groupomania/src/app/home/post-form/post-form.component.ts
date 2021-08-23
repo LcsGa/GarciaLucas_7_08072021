@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../../auth/auth.service";
-import { PostsService } from "../posts.service";
+import { PostsService } from "../../post/posts.service";
 
 @Component({
     selector: "groupomania-post-form",
@@ -9,18 +9,18 @@ import { PostsService } from "../posts.service";
     styleUrls: ["./post-form.component.scss"],
 })
 export class PostFormComponent implements OnInit {
-    public postContent!: FormControl;
+    public postForm!: FormGroup;
 
     constructor(private fb: FormBuilder, private postsService: PostsService, private authService: AuthService) {}
 
     ngOnInit(): void {
-        this.postContent = this.fb.control("", Validators.required);
+        this.postForm = this.fb.group({ content: ["", Validators.required] });
     }
 
     public createPost(): void {
         this.postsService
-            .create({ author: this.authService.user$.value!, content: this.postContent.value })
-            .subscribe(() => this.postsService.fetch().subscribe());
-        this.postContent.reset();
+            .create({ author: this.authService.user$.value!, content: this.postForm.get("content")!.value })
+            .subscribe(() => this.postsService.findAll().subscribe());
+        this.postForm.reset();
     }
 }

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Post, SafeUser } from "@groupomania/dto";
-import { AuthService } from "../../../auth/auth.service";
-import { PostsService } from "../../posts.service";
+import { AuthService } from "../../auth/auth.service";
+import { PostsService } from "../posts.service";
 
 @Component({
     selector: "groupomania-post-toolbar",
@@ -37,10 +37,8 @@ export class PostToolbarComponent implements OnInit {
 
         this.postsService
             .updateLikes({ ...this.post, likes: this.likes })
-            .subscribe(() => this.postsService.fetch().subscribe());
+            .subscribe(() => this.postsService.findAll().subscribe());
     }
-
-    public showComments(): void {}
 
     public showCommentForm(): void {
         this.registerShowCommentForm.emit();

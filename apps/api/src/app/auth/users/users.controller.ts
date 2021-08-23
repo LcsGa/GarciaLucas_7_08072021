@@ -12,6 +12,16 @@ export class UsersController {
     @UseInterceptors(FileInterceptor("avatar"))
     public uploadAvatar(@UploadedFile() avatar: Express.Multer.File) {}
 
+    @Get()
+    public async findAll() {
+        return await this.usersService.findAll();
+    }
+
+    @Get(":id")
+    public async findById(@Param("id") id: string) {
+        return await this.usersService.findById(id);
+    }
+
     @Get(":userId/avatar")
     public getAvatarURL(@Param("userId") userId: string) {
         return { URL: this.usersService.getAvatarURL(userId) };

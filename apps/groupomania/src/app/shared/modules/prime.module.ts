@@ -8,6 +8,7 @@ import { FileUploadModule } from "primeng/fileupload";
 import { InputTextModule } from "primeng/inputtext";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { RippleModule } from "primeng/ripple";
+import { ScrollTopModule } from "primeng/scrolltop";
 import { TieredMenuModule } from "primeng/tieredmenu";
 import { ToastModule } from "primeng/toast";
 
@@ -26,6 +27,7 @@ import { MessageService } from "primeng/api";
         InputTextModule,
         InputTextareaModule,
         RippleModule,
+        ScrollTopModule,
         TieredMenuModule,
         ToastModule,
     ],

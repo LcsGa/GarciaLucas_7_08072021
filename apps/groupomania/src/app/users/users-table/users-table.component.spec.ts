@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CommentContainerComponent } from './comment-container.component';
+import { UsersTableComponent } from './users-table.component';
 
-describe('CommentContainerComponent', () => {
-  let component: CommentContainerComponent;
-  let fixture: ComponentFixture<CommentContainerComponent>;
+describe('UsersTableComponent', () => {
+  let component: UsersTableComponent;
+  let fixture: ComponentFixture<UsersTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CommentContainerComponent ]
+      declarations: [ UsersTableComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CommentContainerComponent);
+    fixture = TestBed.createComponent(UsersTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

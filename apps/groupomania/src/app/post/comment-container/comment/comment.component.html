@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        <div class="comment__actions">
+        <div class="comment__actions" *ngIf="displayMenu">
             <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
             <button
                 pButton

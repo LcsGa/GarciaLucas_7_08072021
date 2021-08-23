@@ -9,6 +9,7 @@
 
     <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
     <button
+        *ngIf="displayMenu"
         pButton
         pRipple
         class="p-button-secondary p-button-icon p-button-rounded p-button-text"
@@ -21,7 +22,7 @@
 <p *ngIf="!inModification">{{ post.content }}</p>
 
 <div class="p-d-flex" *ngIf="inModification">
-    <textarea pInputTextarea style="flex: 1;" [rows]="1" [autoResize]="true" [formControl]="postContent"></textarea>
+    <textarea pInputTextarea style="flex: 1" [rows]="1" [autoResize]="true" [formControl]="postContent"></textarea>
 
     <div class="p-d-flex p-flex-column p-ml-2">
         <button

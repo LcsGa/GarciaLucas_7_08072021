@@ -18,12 +18,7 @@
         ></button>
     </div>
 
-    <button
-        pButton
-        pRipple
-        [class]="post.comments.length ? 'p-button-secondary p-button-text' : 'p-d-none'"
-        (click)="showComments()"
-    >
+    <button pButton pRipple [class]="post.comments.length ? 'p-button-secondary p-button-text' : 'p-d-none'">
         {{ post.comments.length + (post.comments.length > 1 ? " commentaires" : " commentaire") }}
     </button>
 </div>

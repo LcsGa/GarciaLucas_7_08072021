@@ -1,4 +1,4 @@
-<form (ngSubmit)="createPost()">
+<form [formGroup]="postForm" (ngSubmit)="createPost()">
     <p-card styleClass="p-shadow-2 p-mb-5">
         <div class="p-d-flex">
             <groupomania-avatar class="p-mr-3" size="large"></groupomania-avatar>
@@ -8,13 +8,13 @@
                 style="flex: 1;"
                 [autoResize]="true"
                 placeholder="Quoi de neuf ?"
-                [formControl]="postContent"
+                formControlName="content"
             ></textarea>
         </div>
 
         <ng-template pTemplate="footer">
             <div class="p-d-flex p-jc-end">
-                <button pButton pRipple label="Publier" icon="pi pi-send" [disabled]="!postContent.valid"></button>
+                <button pButton pRipple label="Publier" icon="pi pi-send" [disabled]="!postForm.valid"></button>
             </div>
         </ng-template>
     </p-card>

@@ -78,4 +78,9 @@ export class AuthService {
                 },
             });
     }
+
+    public isAuthorOrAdmin(authorId: string): boolean {
+        const user = this.user$.value!;
+        return authorId == user.id || user.admin;
+    }
 }

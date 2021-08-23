@@ -19,6 +19,11 @@ export class HeaderService {
                 routerLink: "/home",
             },
             {
+                label: "Utilisateurs",
+                icon: "pi pi-users",
+                routerLink: "/users",
+            },
+            {
                 label: "Profil",
                 icon: "pi pi-user",
                 routerLink: "/profil",

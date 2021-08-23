@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Post } from "@groupomania/dto";
 import { Observable } from "rxjs";
-import { PostsService } from "./posts.service";
+import { PostsService } from "../post/posts.service";
 
 @Component({
     selector: "groupomania-home",
@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
     constructor(private postsService: PostsService) {}
 
     ngOnInit(): void {
-        this.postsService.fetch().subscribe();
+        this.postsService.authorId$.next("");
+        this.postsService.findAll().subscribe();
     }
 }
