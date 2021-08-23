@@ -1,11 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from "@nestjs/common";
 import { CreateCommentDto, CreatePostDto, UpdateCommentDto, UpdatePostDto } from "libs/dto/src/lib/dto";
+import { CommentsService } from "../comments/comments.service";
+import { CanDeleteGuard } from "../shared/guards/can-delete.guard";
 import { Post as PostEntity } from "./post.entity";
 import { PostsService } from "./posts.service";
 
 @Controller("posts")
 export class PostsController {
-    constructor(private postsService: PostsService) {}
+    constructor(private postsService: PostsService, private commentsService: CommentsService) {}
 
     @Post()
     public async create(@Body() createPostDto: CreatePostDto): Promise<PostEntity> {
@@ -14,13 +16,17 @@ export class PostsController {
 
     @Post("comment")
     public async createComment(@Body() createCommentDto: CreateCommentDto): Promise<PostEntity> {
-        return await this.postsService.createComment(createCommentDto);
+        return await this.commentsService.createComment(createCommentDto);
     }
 
     @Get()
     public async findAll(): Promise<PostEntity[]> {
-        const posts = await this.postsService.findAll();
-        return posts;
+        return await this.postsService.findAll();
+    }
+
+    @Get(":userId")
+    public async findByUserId(@Param("userId") userId: string) {
+        return await this.postsService.findByUser(userId);
     }
 
     @Patch()
@@ -35,16 +41,18 @@ export class PostsController {
 
     @Patch("comment")
     public async updateComment(@Body() updatedComment: UpdateCommentDto): Promise<PostEntity> {
-        return await this.postsService.updateComment(updatedComment);
+        return await this.commentsService.updateComment(updatedComment);
     }
 
     @Delete(":id")
+    @UseGuards(CanDeleteGuard)
     public async delete(@Param("id") id: string) {
         await this.postsService.delete(id);
     }
 
     @Delete("comments/:id")
+    @UseGuards(CanDeleteGuard)
     public async deleteComment(@Param("id") commentId: string) {
-        await this.postsService.deleteComment(commentId);
+        await this.commentsService.deleteComment(commentId);
     }
 }
