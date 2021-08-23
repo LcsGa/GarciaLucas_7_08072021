@@ -7,12 +7,15 @@ import { Logger } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import { NestExpressApplication } from "@nestjs/platform-express";
 import { join } from "path";
+import * as helmet from "helmet";
 
 import { AppModule } from "./app/app.module";
 import { environment } from "./environments/environment";
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+    app.use(helmet());
 
     const globalPrefix = "/api";
     app.setGlobalPrefix(globalPrefix);
