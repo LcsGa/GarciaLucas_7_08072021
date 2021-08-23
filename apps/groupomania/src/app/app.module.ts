@@ -9,7 +9,8 @@ import { RouterModule, Routes } from "@angular/router";
 
 import { AppComponent } from "./app.component";
 
-import { IsSignedInGuard } from "./auth/guards/is-signed-in.guard";
+import { IsSignedInGuard } from "./shared/guards/is-signed-in.guard";
+
 import { JwtInterceptor } from "./shared/interceptors/jwt.interceptor";
 
 import { registerLocaleData } from "@angular/common";
@@ -30,6 +31,11 @@ const routes: Routes = [
     {
         path: "profil",
         loadChildren: () => import("./profil/profil.module").then((m) => m.ProfilModule),
+        canActivate: [IsSignedInGuard],
+    },
+    {
+        path: "users",
+        loadChildren: () => import("./users/users.module").then((m) => m.UsersModule),
         canActivate: [IsSignedInGuard],
     },
 ];
