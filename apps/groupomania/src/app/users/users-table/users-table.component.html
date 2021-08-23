@@ -1,41 +1,46 @@
 <p-card styleClass="p-mb-5">
-    <p-table #userDT [value]="users" [filterDelay]="0" [globalFilterFields]="['lastname', 'firstname', 'email']">
+    <p-table
+        #userDT
+        [value]="users"
+        styleClass="p-datatable-striped p-datatable-sm"
+        [rowHover]="true"
+        [responsive]="true"
+        [filterDelay]="0"
+        [globalFilterFields]="['lastname', 'firstname', 'email']"
+    >
         <ng-template pTemplate="caption">
-            <div class="p-d-flex p-jc-between p-ai-center">
-                Liste d'utilisateurs
-                <span class="p-input-icon-left">
+            <div class="p-d-flex p-flex-wrap p-jc-between p-ai-center">
+                <p>Liste d'utilisateurs</p>
+                <div class="p-input-icon-left">
                     <i class="pi pi-search"></i>
                     <input
                         pInputText
                         type="text"
+                        class="p-inputtext-sm"
                         (input)="searchUsers($event, userDT)"
                         placeholder="Rerchercher un utilisateur"
                     />
-                </span>
+                </div>
             </div>
         </ng-template>
 
         <ng-template pTemplate="header">
             <tr>
-                <th>Avatar</th>
+                <th style="width: 4.5rem;">Avatar</th>
                 <th pSortableColumn="lastname">Nom <p-sortIcon field="lastname"></p-sortIcon></th>
                 <th pSortableColumn="firstname">Prénom <p-sortIcon field="firstname"></p-sortIcon></th>
-                <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
-                <th style="text-align: center;">Posts</th>
+                <th style="width: 16rem;" pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
             </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-user>
-            <tr>
+            <tr (click)="loadUserPosts(user.id)">
                 <td>
                     <groupomania-avatar [user]="user"></groupomania-avatar>
                 </td>
                 <td>{{ user.lastname }}</td>
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.email }}</td>
-                <td style="text-align: center;">
-                    <button pButton pRipple icon="pi pi-eye" (click)="loadUserPosts(user.id)"></button>
-                </td>
             </tr>
         </ng-template>
     </p-table>

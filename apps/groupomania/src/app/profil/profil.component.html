@@ -1,6 +1,7 @@
 <p-toast></p-toast>
 
 <p-confirmDialog
+    styleClass="p-m-3"
     header="Suppression du compte"
     acceptLabel="Confirmer la suppression"
     rejectLabel="Annuler la suppression"
@@ -38,14 +39,22 @@
     </form>
 
     <ng-template pTemplate="footer">
-        <button pButton pRipple class="p-mr-3" label="Enregistrer" (click)="updateUser()"></button>
-        <button
-            pButton
-            pRipple
-            class="p-button-danger p-button-outlined"
-            label="Supprimer le compte"
-            icon="pi pi-trash"
-            (click)="deleteUser()"
-        ></button>
+        <div class="p-d-flex p-flex-column p-flex-sm-row">
+            <button
+                pButton
+                pRipple
+                class="p-mb-3 p-mr-sm-3 p-mb-sm-0"
+                label="Enregistrer"
+                (click)="updateUser()"
+            ></button>
+            <button
+                pButton
+                pRipple
+                class="p-button-danger p-button-outlined"
+                label="Supprimer le compte"
+                icon="pi pi-trash"
+                (click)="deleteUser()"
+            ></button>
+        </div>
     </ng-template>
 </p-card>

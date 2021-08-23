@@ -1,4 +1,4 @@
-<div class="p-d-flex p-jc-between p-mb-2">
+<div class="p-d-none p-d-sm-flex p-jc-between p-mb-2">
     <div class="p-d-flex p-ai-center">
         <p-button
             [styleClass]="isliked ? 'p-mr-2 p-button-text p-button-danger' : 'p-mr-2 p-button-text p-button-secondary'"
@@ -21,4 +21,33 @@
     <button pButton pRipple [class]="post.comments.length ? 'p-button-secondary p-button-text' : 'p-d-none'">
         {{ post.comments.length + (post.comments.length > 1 ? " commentaires" : " commentaire") }}
     </button>
+</div>
+
+<div class="p-d-sm-none p-d-flex p-jc-between p-mb-2">
+    <div class="p-d-flex p-ai-center">
+        <p-button
+            [styleClass]="isliked ? 'p-mr-2 p-button-text p-button-danger' : 'p-mr-2 p-button-text p-button-secondary'"
+            icon="pi pi-heart"
+            [label]="likes.length ? ' ' : ''"
+            [badge]="likes.length ? likes.length + '' : ''"
+            [badgeClass]="isliked ? 'p-badge-danger' : 'p-badge-secondary'"
+            (click)="like()"
+        ></p-button>
+
+        <button
+            pButton
+            pRipple
+            class="p-button-secondary p-button-text"
+            icon="pi pi-comment"
+            (click)="showCommentForm()"
+        ></button>
+    </div>
+
+    <button
+        pButton
+        pRipple
+        [class]="post.comments.length ? 'p-button-secondary p-button-text' : 'p-d-none'"
+        icon="pi pi-comments"
+        [label]="post.comments.length + ''"
+    ></button>
 </div>

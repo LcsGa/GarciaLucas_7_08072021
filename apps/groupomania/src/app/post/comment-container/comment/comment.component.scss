@@ -2,11 +2,13 @@
     border-radius: 10px;
     background: var(--surface-50);
 
-    &:hover .comment__actions {
-        display: block;
-    }
+    @media (min-width: 575px) {
+        &:hover .comment__actions {
+            display: block;
+        }
 
-    &__actions {
-        display: none;
+        &__actions {
+            display: none;
+        }
     }
 }

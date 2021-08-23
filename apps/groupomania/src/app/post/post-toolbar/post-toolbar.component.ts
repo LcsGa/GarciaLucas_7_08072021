@@ -11,6 +11,7 @@ import { PostsService } from "../posts.service";
 export class PostToolbarComponent implements OnInit {
     @Input() public post!: Post;
     @Output() public registerShowCommentForm = new EventEmitter();
+    @Output() public registerShowComments = new EventEmitter();
     public isliked: boolean = false;
     public likes: SafeUser[] = [];
 
