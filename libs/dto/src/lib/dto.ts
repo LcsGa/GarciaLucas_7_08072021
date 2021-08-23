@@ -11,6 +11,7 @@ export class CreateUserDto extends SigninUserDto {
 
 export class User extends CreateUserDto {
     readonly id!: string;
+    readonly admin!: boolean;
 }
 
 export type SafeUser = Omit<User, "password">;
