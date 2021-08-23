@@ -4,16 +4,17 @@ import { ConfigModule } from "@nestjs/config";
 import { PostsModule } from "./posts/posts.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
+// Controllers
 import { AppController } from "./app.controller";
 
-// utils
+// Utils
 import { join } from "path";
 import { environment } from "../environments/environment";
 
 // Entities
-import { User } from "./auth/users/user.entity";
-import { Post } from "./posts/post.entity";
 import { Comment } from "./comments/comment.entity";
+import { Post } from "./posts/post.entity";
+import { User } from "./auth/users/user.entity";
 
 // Guards
 import { APP_GUARD } from "@nestjs/core";
