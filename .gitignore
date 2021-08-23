@@ -42,5 +42,5 @@ Thumbs.db
 # environment
 .env
 
-# my app
-/apps/api/src/assets/users
+# users pictures
+/apps/api/src/assets/users/*
