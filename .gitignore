@@ -43,4 +43,5 @@ Thumbs.db
 .env
 
 # users pictures
-/apps/api/src/assets/users/*
+/apps/api/public/images/users/*
+!.gitkeep

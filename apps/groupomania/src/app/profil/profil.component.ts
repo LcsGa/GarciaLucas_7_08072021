@@ -9,7 +9,6 @@ import { AuthService } from "../auth/auth.service";
     styleUrls: ["./profil.component.scss"],
 })
 export class ProfilComponent implements OnInit {
-    public avatarUploaded = false;
     public readonly user = this.authService.user$.value!;
     public profilForm!: FormGroup;
 
@@ -28,8 +27,7 @@ export class ProfilComponent implements OnInit {
     }
 
     public reloadPage(): void {
-        this.avatarUploaded = true;
-        setTimeout(() => location.reload(), 1000); // fix: let enough time to restart the server in dev mode, due to hot reloading that restarts the it, after adding a new file with multer
+        location.reload();
     }
 
     public updateUser(): void {

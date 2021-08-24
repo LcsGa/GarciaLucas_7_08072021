@@ -20,7 +20,7 @@ async function bootstrap() {
     const globalPrefix = "/api";
     app.setGlobalPrefix(globalPrefix);
 
-    app.useStaticAssets(join(environment.projectDir, "assets"), { prefix: globalPrefix });
+    app.useStaticAssets(join(environment.projectDir, "..", "public"), { prefix: globalPrefix });
 
     const port = process.env.PORT || 3333;
     await app.listen(port, () => {

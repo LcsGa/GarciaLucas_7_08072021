@@ -15,7 +15,7 @@ import { environment } from "apps/api/src/environments/environment";
     imports: [
         MulterModule.register({
             storage: multer.diskStorage({
-                destination: (_req, _file, cb) => cb(null, join(environment.projectDir, "assets/users")),
+                destination: (_req, _file, cb) => cb(null, join(environment.projectDir, "..", "public/images/users")),
                 filename: (req, _file, cb) => cb(null, `${(req.user as { userId: string }).userId}.jpg`),
             }),
         }),

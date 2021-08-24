@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { AvatarModule } from "../shared/components/avatar/avatar.module";
 import { CommonModule } from "@angular/common";
 import { PrimeModule } from "../shared/modules/prime.module";
-import { ProgressSpinnerModule } from "primeng/progressspinner";
 import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
 
@@ -12,13 +11,6 @@ const routes: Routes = [{ path: "", component: ProfilComponent }];
 
 @NgModule({
     declarations: [ProfilComponent],
-    imports: [
-        AvatarModule,
-        CommonModule,
-        PrimeModule,
-        ProgressSpinnerModule,
-        ReactiveFormsModule,
-        RouterModule.forChild(routes),
-    ],
+    imports: [AvatarModule, CommonModule, PrimeModule, ReactiveFormsModule, RouterModule.forChild(routes)],
 })
 export class ProfilModule {}

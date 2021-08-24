@@ -37,8 +37,8 @@ export class UsersService {
     }
 
     public getAvatarURL(userId: string): string {
-        const avatarPath = `/users/${userId}.jpg`;
-        const hasAvatar = fs.existsSync(join(environment.projectDir, "assets", avatarPath));
+        const avatarPath = `/images/users/${userId}.jpg`;
+        const hasAvatar = fs.existsSync(join(environment.projectDir, "../public", avatarPath));
 
         if (hasAvatar) {
             return "/api" + avatarPath;
