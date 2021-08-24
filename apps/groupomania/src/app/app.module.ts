@@ -7,16 +7,21 @@ import { HeaderModule } from "./shared/components/header/header.module";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
 
+// Components
 import { AppComponent } from "./app.component";
 
+// Guards
 import { IsSignedInGuard } from "./shared/guards/is-signed-in.guard";
 
+// Interceptors
 import { JwtInterceptor } from "./shared/interceptors/jwt.interceptor";
 
+// Utils
 import { registerLocaleData } from "@angular/common";
 import localeFr from "@angular/common/locales/fr";
 registerLocaleData(localeFr, "fr");
 
+// Routes
 const routes: Routes = [
     { path: "", pathMatch: "full", redirectTo: "home" },
     {
