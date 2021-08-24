@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { PostsService } from "../post/posts.service";
 
 @Component({
     selector: "groupomania-users",
@@ -6,11 +7,9 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: ["./users.component.scss"],
 })
 export class UsersComponent implements OnInit {
-    constructor() {}
+    constructor(private postsService: PostsService) {}
 
-    ngOnInit(): void {}
-
-    test() {
-        console.log(history.state.data);
+    ngOnInit(): void {
+        this.postsService.posts$.next([]);
     }
 }

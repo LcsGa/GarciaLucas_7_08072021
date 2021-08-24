@@ -13,7 +13,7 @@ import { UsersService } from "../users.service";
 export class UsersTableComponent implements OnInit {
     public users!: SafeUser[];
 
-    constructor(private usersService: UsersService, private postsService: PostsService, private router: Router) {}
+    constructor(private usersService: UsersService, private router: Router) {}
 
     ngOnInit(): void {
         this.usersService.findAll().subscribe((users) => (this.users = users));
@@ -25,6 +25,5 @@ export class UsersTableComponent implements OnInit {
 
     public loadUserPosts(userId: string): void {
         this.router.navigate(["users", userId]);
-        this.postsService.authorId$.next(userId);
     }
 }
