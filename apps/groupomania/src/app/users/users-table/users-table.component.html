@@ -43,5 +43,9 @@
                 <td>{{ user.email }}</td>
             </tr>
         </ng-template>
+
+        <ng-template pTemplate="summary">
+            <p>Au total il y a {{users ? users.length : 0}} utilisateur(s)</p>
+        </ng-template>
     </p-table>
 </p-card>
