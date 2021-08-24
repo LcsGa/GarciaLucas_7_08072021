@@ -12,5 +12,7 @@ export class CommentContainerComponent implements OnInit {
 
     constructor() {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.post.comments.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+    }
 }

@@ -60,8 +60,8 @@ export class PostContentComponent implements OnInit {
     }
 
     public saveModifications(): void {
-        this.postsService.update({ id: this.post.id, content: this.postContent.value }).subscribe(() => {
-            this.postsService.findAll().subscribe();
-        });
+        this.postsService
+            .update({ id: this.post.id, content: this.postContent.value })
+            .subscribe(() => this.toggleModificationMode());
     }
 }

@@ -36,9 +36,7 @@ export class PostToolbarComponent implements OnInit {
             this.likes = this.likes.filter((user) => user.id != connectedUser.id);
         }
 
-        this.postsService
-            .updateLikes({ ...this.post, likes: this.likes })
-            .subscribe(() => this.postsService.findAll().subscribe());
+        this.postsService.updateLikes({ ...this.post, likes: this.likes }).subscribe();
     }
 
     public showCommentForm(): void {

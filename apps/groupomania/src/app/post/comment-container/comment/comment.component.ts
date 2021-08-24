@@ -44,10 +44,7 @@ export class CommentComponent implements OnInit {
                     this.confirmService.confirm({
                         header: "Suppression du commentaire",
                         message: "Voulez-vous confirmer la suppression de votre commentaire ?",
-                        accept: () =>
-                            this.postsService
-                                .deleteComment(this.comment.id)
-                                .subscribe(() => this.postsService.findAll().subscribe()),
+                        accept: () => this.postsService.deleteComment(this.postId, this.comment.id).subscribe(),
                     }),
             },
         ];
@@ -62,7 +59,7 @@ export class CommentComponent implements OnInit {
     public saveModifications(): void {
         this.postsService
             .updateComment({ id: this.comment.id, message: this.commentMessage.value, postId: this.postId })
-            .subscribe(() => this.postsService.findAll().subscribe());
+            .subscribe();
     }
 
     public cancelModifications(): void {

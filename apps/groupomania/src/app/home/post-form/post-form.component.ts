@@ -20,7 +20,7 @@ export class PostFormComponent implements OnInit {
     public createPost(): void {
         this.postsService
             .create({ author: this.authService.user$.value!, content: this.postForm.get("content")!.value })
-            .subscribe(() => this.postsService.findAll().subscribe());
+            .subscribe();
         this.postForm.reset();
     }
 }

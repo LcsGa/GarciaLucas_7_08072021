@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { SafeUser } from "@groupomania/dto";
 import { Table } from "primeng/table";
-import { PostsService } from "../../post/posts.service";
 import { UsersService } from "../users.service";
 
 @Component({

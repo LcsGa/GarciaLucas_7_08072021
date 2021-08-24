@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Post } from "@groupomania/dto";
 import { AuthService } from "apps/groupomania/src/app/auth/auth.service";
 import { PostsService } from "../../posts.service";
@@ -27,7 +27,6 @@ export class CommentFormComponent implements OnInit {
                 message: this.commentForm.get("message")!.value,
             })
             .subscribe(() => {
-                this.postsService.findAll().subscribe();
                 this.commentForm.reset();
             });
     }
