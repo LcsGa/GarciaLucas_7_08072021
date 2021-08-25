@@ -19,7 +19,7 @@ export class UsersTableComponent implements OnInit {
         userDT.filterGlobal((event.target as HTMLInputElement).value, "contains");
     }
 
-    public loadUserPosts(userId: string): void {
-        this.router.navigate(["users", userId]);
+    public loadUserPosts(user: SafeUser): void {
+        this.router.navigate(["users", user.id], { queryParams: { fullname: `${user.firstname} ${user.lastname}` } });
     }
 }

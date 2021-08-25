@@ -34,7 +34,7 @@
         </ng-template>
 
         <ng-template pTemplate="body" let-user>
-            <tr (click)="loadUserPosts(user.id)">
+            <tr (click)="loadUserPosts(user)">
                 <td>
                     <groupomania-avatar [user]="user"></groupomania-avatar>
                 </td>
