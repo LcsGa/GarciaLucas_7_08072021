@@ -9,9 +9,14 @@ import { TableModule } from "primeng/table";
 import { UsersComponent } from "./users.component";
 import { UserPostsComponent } from "./user-posts/user-posts.component";
 import { UsersTableComponent } from "./users-table/users-table.component";
+import { PostsResolver } from "../shared/resolvers/posts/posts.resolver";
 
 const routes: Routes = [
-    { path: "", component: UsersComponent, children: [{ path: ":userId", component: UserPostsComponent }] },
+    {
+        path: "",
+        component: UsersComponent,
+        children: [{ path: ":userId", component: UserPostsComponent, resolve: { posts: PostsResolver } }],
+    },
 ];
 
 @NgModule({

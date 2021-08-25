@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { Post } from "@groupomania/dto";
-import { Observable } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 import { PostsService } from "../post/posts.service";
 
 @Component({
@@ -9,12 +10,11 @@ import { PostsService } from "../post/posts.service";
     styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
-    public posts$: Observable<Post[]> = this.postsService.posts$;
+    public posts$: BehaviorSubject<Post[]> = this.postsService.posts$;
 
-    constructor(private postsService: PostsService) {}
+    constructor(private postsService: PostsService, private route: ActivatedRoute) {}
 
     ngOnInit(): void {
-        this.postsService.authorId$.next("");
-        this.postsService.findAll().subscribe();
+        this.route.data.subscribe((data) => this.postsService.posts$.next(data.posts));
     }
 }

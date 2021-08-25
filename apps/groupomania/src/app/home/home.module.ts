@@ -9,8 +9,9 @@ import { RouterModule, Routes } from "@angular/router";
 // Components
 import { HomeComponent } from "./home.component";
 import { PostFormComponent } from "./post-form/post-form.component";
+import { PostsResolver } from "../shared/resolvers/posts/posts.resolver";
 
-const routes: Routes = [{ path: "", component: HomeComponent }];
+const routes: Routes = [{ path: "", component: HomeComponent, resolve: { posts: PostsResolver } }];
 
 @NgModule({
     declarations: [HomeComponent, PostFormComponent],

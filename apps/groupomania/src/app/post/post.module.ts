@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { CommentComponent } from "./comment-container/comment/comment.component";
 import { CommentContainerComponent } from "./comment-container/comment-container.component";
 import { CommentFormComponent } from "./comment-container/comment-form/comment-form.component";
+import { NotFoundComponent } from "./not-found/not-found.component";
 import { PostComponent } from "./post.component";
 import { PostContentComponent } from "./post-content/post-content.component";
 import { PostToolbarComponent } from "./post-toolbar/post-toolbar.component";
@@ -21,11 +22,12 @@ import { FocusDirective } from "../shared/directives/focus.directive";
         CommentContainerComponent,
         CommentFormComponent,
         FocusDirective,
+        NotFoundComponent,
         PostComponent,
         PostContentComponent,
         PostToolbarComponent,
     ],
     imports: [AvatarModule, CommonModule, PrimeModule, ReactiveFormsModule],
-    exports: [PostComponent],
+    exports: [PostComponent, NotFoundComponent],
 })
 export class PostModule {}

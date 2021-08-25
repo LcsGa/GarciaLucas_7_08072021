@@ -16,6 +16,9 @@ import { IsSignedInGuard } from "./shared/guards/is-signed-in.guard";
 // Interceptors
 import { JwtInterceptor } from "./shared/interceptors/jwt.interceptor";
 
+// Resolvers
+import { UsersResolver } from "./shared/resolvers/users/users.resolver";
+
 // Utils
 import { registerLocaleData } from "@angular/common";
 import localeFr from "@angular/common/locales/fr";
@@ -42,6 +45,7 @@ const routes: Routes = [
         path: "users",
         loadChildren: () => import("./users/users.module").then((m) => m.UsersModule),
         canActivate: [IsSignedInGuard],
+        resolve: { users: UsersResolver },
     },
 ];
 

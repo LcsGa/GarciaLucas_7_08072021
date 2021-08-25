@@ -12,8 +12,4 @@ export class UsersService {
     public findAll(): Observable<SafeUser[]> {
         return this.http.get<SafeUser[]>("/api/users");
     }
-
-    public findById(id: string): Observable<SafeUser> {
-        return this.http.get<SafeUser>("/api/users/" + id);
-    }
 }

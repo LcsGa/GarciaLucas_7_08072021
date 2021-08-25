@@ -1,8 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { SafeUser } from "@groupomania/dto";
 import { Table } from "primeng/table";
-import { UsersService } from "../users.service";
 
 @Component({
     selector: "groupomania-users-table",
@@ -10,13 +9,11 @@ import { UsersService } from "../users.service";
     styleUrls: ["./users-table.component.scss"],
 })
 export class UsersTableComponent implements OnInit {
-    public users!: SafeUser[];
+    @Input() public users!: SafeUser[];
 
-    constructor(private usersService: UsersService, private router: Router) {}
+    constructor(private router: Router) {}
 
-    ngOnInit(): void {
-        this.usersService.findAll().subscribe((users) => (this.users = users));
-    }
+    ngOnInit(): void {}
 
     public searchUsers(event: Event, userDT: Table): void {
         userDT.filterGlobal((event.target as HTMLInputElement).value, "contains");
